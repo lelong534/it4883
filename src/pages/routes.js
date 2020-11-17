@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
 import VideoSurveillance from './GroupFunction1/VideoSurveillance';
+import ProblemReport from './GroupFunction1/ProblemReport';
 import CaregiverCoordinate from './GroupFunction1/CaregiverCoordinate';
 import ResultTracking from './GroupFunction1/ResultTracking';
 import AreaChoose from './GroupFunction1/MonitorCropStatus/AreaChoose';
@@ -117,6 +118,10 @@ export const routes = [
   {
     path: '/monitor',
     component: Monitor,
+  },
+  {
+    path: '/problem-report',
+    component: ProblemReport,
   },
 ];
 

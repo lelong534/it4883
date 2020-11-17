@@ -25,7 +25,7 @@ class Monitor extends React.Component {
         return (
             <div className="h-100 bg-white">
                 <div className="row">
-                    <div className="col col-md-3">
+                    <div className="col col-md-2">
                         <h5 className="m-1">Giám sát tình trạng cây trồng</h5>
                         <form>
                             <div className="form-row">
@@ -101,7 +101,7 @@ class Monitor extends React.Component {
                         </form>
 
                     </div>
-                    <div className="col col-md-9">
+                    <div className="col col-md-10">
                         <div>
                             <img className="w-100" src={this.state.resultUrl}></img>
                         </div>

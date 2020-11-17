@@ -27,7 +27,7 @@ function TrackResult() {
                         <td>Sâu bệnh</td>
                         <td>50%</td>
                         <td>
-                            <a className="text-primary">Link báo cáo</a>
+                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
                         </td>
                         <td>
                             Nguyễn Văn Nam
@@ -40,7 +40,7 @@ function TrackResult() {
                         <td>Sâu bệnh</td>
                         <td>50%</td>
                         <td>
-                            <a className="text-primary">Link báo cáo</a>
+                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
                         </td>
                         <td>
                             Nguyễn Văn Ba
@@ -53,7 +53,7 @@ function TrackResult() {
                         <td>Ngập úng</td>
                         <td>0%</td>
                         <td>
-                            <a className="text-primary">Link báo cáo</a>
+                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
                         </td>
                         <td>
                             Trần Văn Đức
@@ -66,7 +66,7 @@ function TrackResult() {
                         <td>Ngập úng</td>
                         <td>100%</td>
                         <td>
-                            <a className="text-primary">Link báo cáo</a>
+                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
                         </td>
                         <td>
                             Nguyễn Văn Nam
@@ -79,7 +79,7 @@ function TrackResult() {
                         <td>Héo úa</td>
                         <td>100%</td>
                         <td>
-                            <a className="text-primary">Link báo cáo</a>
+                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
                         </td>
                         <td>
                             Hoàng Văn Hoàng

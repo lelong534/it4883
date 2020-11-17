@@ -12,6 +12,8 @@ const IMAGES = {
   areaDrone: `${PUBLIC_URL}/images/areadrone1.png`,
   areaMonitor: `${PUBLIC_URL}/images/areamonitor.png`,
   resultMonitor: `${PUBLIC_URL}/images/resultmonitor.png`,
+  weakTree: `${PUBLIC_URL}/images/weaktree.jpg`,
+  goodTree: `${PUBLIC_URL}/images/goodtree.jpg`,
 };
 
 export default IMAGES;
