@@ -97,4 +97,36 @@ export const sidebarMenu = [
     icon: 'fas fa-user-circle',
     route: '/user-management',
   },
+  {
+    key: 'TreeMonitor',
+    heading: 'Cây trồng',
+    icon: 'far fa-tree-alt',
+    route: '/tree-monitor',
+    subMenu: [
+      {
+        key: 'VideoSurveillance',
+        heading: 'Giám sát video',
+        icon: 'fas fa-video',
+        route: '/video-surveillance',
+      },
+      {
+        key: 'MonitorCropStatus',
+        heading: 'Giám sát cây trồng',
+        icon: 'fas fa-tree-alt',
+        route: '/area-choose',
+      },
+      {
+        key: 'CaregiverCoordinate',
+        heading: 'Điều phối xử lý sự cố',
+        icon: 'far fa-person-dolly-empty',
+        route: '/caregiver-coordinate',
+      },
+      {
+        key: 'ResultTracking',
+        heading: 'Kết quả xử lý sự cố',
+        icon: 'fas fa-sticky-note',
+        route: '/result-tracking',
+      },
+    ],
+  },
 ];

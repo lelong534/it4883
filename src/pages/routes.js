@@ -2,6 +2,11 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
+import VideoSurveillance from './GroupFunction1/VideoSurveillance';
+import CaregiverCoordinate from './GroupFunction1/CaregiverCoordinate';
+import ResultTracking from './GroupFunction1/ResultTracking';
+import AreaChoose from './GroupFunction1/MonitorCropStatus/AreaChoose';
+import Monitor from './GroupFunction1/MonitorCropStatus/Monitor';
 
 export const routes = [
   {
@@ -72,6 +77,26 @@ export const routes = [
   {
     path: '/user-management',
     component: () => <div>Quản lý người dùng</div>,
+  },
+  {
+    path: '/video-surveillance',
+    component: VideoSurveillance,
+  },
+  {
+    path: '/caregiver-coordinate',
+    component: CaregiverCoordinate,
+  },
+  {
+    path: '/result-tracking',
+    component: ResultTracking,
+  },
+  {
+    path: '/area-choose',
+    component: AreaChoose,
+  },
+  {
+    path: '/monitor',
+    component: Monitor,
   },
 ];
 
