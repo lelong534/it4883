@@ -100,10 +100,10 @@ const AutoProblem = () => {
 				</Item>
 			</Carousel>
 			<br/>
-			<Title level={3}>Danh sách video có sự cố </Title>
+			<Title level={3}>Danh sách hình ảnh có sự cố </Title>
 			<ProblemTable/>
 			<br/>
-			<Title level={3}>Danh sách ảnh có sự cố </Title>
+			<Title level={3}>Danh sách video có sự cố </Title>
 			<ProblemTable/>
 		</Container>
 	);
