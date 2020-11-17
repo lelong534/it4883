@@ -101,10 +101,10 @@ const HandworkProblem = () => {
 				</Item>
 			</Carousel>
 			<br/>
-			<Title level={3}>Danh sách video</Title>
+			<Title level={3}>Danh sách hình ảnh</Title>
 			<ProblemTable/>
 			<br/>
-			<Title level={3}>Danh sách hình ảnh</Title>
+			<Title level={3}>Danh sách video</Title>
 			<ProblemTable/>
 		</Container>
 	);

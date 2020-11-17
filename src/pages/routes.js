@@ -12,6 +12,7 @@ import AutoProblem from './AutoProblem';
 import HandworkProblem from './HandworkProblem';
 import AutoProbDetail from './AutoProbDetail';
 import HandworkProbDetail from './HandworkProbDetail';
+import ListUser from './User/components/listUser';
 
 export const routes = [
   {
@@ -97,7 +98,7 @@ export const routes = [
   },
   {
     path: '/user-management',
-    component: () => <div>Quản lý người dùng</div>,
+    component: ListUser,
   },
   {
     path: '/video-surveillance',
