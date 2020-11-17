@@ -7,7 +7,7 @@ export const sidebarMenu = [
   },
   {
     key: 'Drones',
-    heading: 'Điều khiển drone',
+    heading: 'Quản lý drone',
     icon: 'fas fa-drone-alt',
     route: '/drones',
     subMenu: [
@@ -28,6 +28,12 @@ export const sidebarMenu = [
         heading: 'Thống kê drone',
         icon: 'fa fa-file-chart-line',
         route: '/drone-statistic',
+      },
+      {
+        key: 'DroneData',
+        heading: 'Kết nối dữ liệu',
+        icon: 'fa fa-file-chart-line',
+        route: '/drone-data',
       },
     ],
   },

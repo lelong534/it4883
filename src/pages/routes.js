@@ -13,6 +13,10 @@ import HandworkProblem from './HandworkProblem';
 import AutoProbDetail from './AutoProbDetail';
 import HandworkProbDetail from './HandworkProbDetail';
 import ListUser from './User/components/listUser';
+import DroneState from './Drones/DroneState'
+import DroneStatistic from './Drones/DroneStatistic'
+import FlySetting from './Drones/FlySetting'
+import DroneConnectData from './Drones/DroneConnectData'
 
 export const routes = [
   {
@@ -30,19 +34,23 @@ export const routes = [
   },
   {
     path: '/drone-state',
-    component: () => <div>Tình trạng drone</div>,
+    component: () => <DroneState />,
   },
   {
     path: '/drones',
-    component: () => <div>DroneManagement</div>,
+    component: () => <DroneConnectData />,
   },
   {
     path: '/fly-setting',
-    component: () => <div>Thiết lập đường bay</div>,
+    component: () => <FlySetting />,
   },
   {
     path: '/drone-statistic',
-    component: () => <div>Thống kê drone</div>,
+    component: () => <DroneStatistic />,
+  },
+  {
+    path: '/drone-data',
+    component: () => <div>Kết nối dữ liệu từ drone</div>,
   },
   {
     path: '/flight-hub',
