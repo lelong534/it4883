@@ -2,6 +2,10 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Dashboard from './Dashboard';
+import AutoProblem from './AutoProblem';
+import HandworkProblem from './HandworkProblem';
+import AutoProbDetail from './AutoProbDetail';
+import HandworkProbDetail from './HandworkProbDetail';
 
 export const routes = [
   {
@@ -10,12 +14,20 @@ export const routes = [
     exact: true,
   },
   {
-    path: '/drones',
-    component: () => <div>DroneManagement</div>,
+    path: '/auto-problem-detail',
+    component: AutoProbDetail,
+  },
+  {
+    path: '/hand-problem-detail',
+    component: HandworkProbDetail,
   },
   {
     path: '/drone-state',
     component: () => <div>Tình trạng drone</div>,
+  },
+  {
+    path: '/drones',
+    component: () => <div>DroneManagement</div>,
   },
   {
     path: '/fly-setting',
@@ -68,6 +80,14 @@ export const routes = [
   {
     path: '/handle-problem',
     component: () => <div>Xử lý sự cố</div>,
+  },
+  {
+    path: '/auto-problem',
+    component: AutoProblem
+  },
+  {
+    path: '/handwork-problem',
+    component: HandworkProblem
   },
   {
     path: '/user-management',
