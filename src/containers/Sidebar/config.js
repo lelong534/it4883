@@ -90,6 +90,20 @@ export const sidebarMenu = [
     heading: 'Xử lý sự cố',
     icon: 'fas fa-toolbox',
     route: '/handle-problem',
+    subMenu: [
+      {
+        key: 'AutoProblem',
+        heading: 'Sự cố tự động',
+        icon: 'fas fa-robot',
+        route: '/auto-problem',
+      },
+      {
+        key: 'HandworkProblem',
+        heading: 'Sự cố thủ công',
+        icon: 'fas fa-tools',
+        route: '/handwork-problem',
+      },
+    ],
   },
   {
     key: 'UserManagement',
