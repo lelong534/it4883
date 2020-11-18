@@ -32,6 +32,32 @@ export const sidebarMenu = [
     ],
   },
   {
+    key: 'Function2',
+    heading: 'Nhóm chức năng 2',
+    icon: 'fas fa-chart-line',
+    route: '/function2',
+    subMenu: [
+      {
+        key: 'MetaData',
+        heading: 'Lưu trữ hình ảnh',
+        icon: 'fal fa-monitor-heart-rate',
+        route: '/meta-data',
+      },
+      {
+        key: 'Check',
+        heading: 'Tra cứu',
+        icon: 'fa fa-user-chart',
+        route: '/check',
+      },
+      {
+        key: 'Report',
+        heading: 'Báo cáo thống kê',
+        icon: 'fa fa-file-chart-line',
+        route: '/report',
+      },
+    ],
+  },
+  {
     key: 'FlightHub',
     heading: 'Flight hub',
     icon: 'fab fa-hubspot',
@@ -78,6 +104,45 @@ export const sidebarMenu = [
     heading: 'Lịch sử hoạt động',
     icon: 'fas fa-file-signature',
     route: '/activity-log',
+    subMenu: [
+      {
+        key: 'LogUser',
+        heading: 'Lịch sử hoạt động người dùng',
+        icon: 'fas fa-user-circle',
+        route: '/log-user',
+      },
+      {
+        key: 'LogDrone',
+        heading: 'Lịch sử hoạt động của drone',
+        icon: 'fas fa-drone-alt',
+        route: '/log-drone',
+      },
+      {
+        key: 'LogProblem',
+        heading: 'Lịch sử xử lý sự cố',
+        icon: 'fas fa-toolbox',
+        route: '/log-problem',
+      },
+      {
+        key: 'LogWarn',
+        heading: 'Lịch sử cảnh báo',
+        icon: 'far fa-bell',
+        route: '/log-warn',
+      },
+      {
+        key: 'LogPayLoad',
+        heading: 'Lịch sử hoạt động của PayLoad',
+     
+        icon: 'fas fa-layer-group',
+        route: '/log-payload',
+      },
+      {
+        key: 'LogMetaData',
+        heading: 'Lịch sử lưu trữ hình ảnh/video',
+        icon: 'fas fa-images',
+        route: '/log-metadata',
+      },
+    ],
   },
   {
     key: 'SurveillanceDomain',
@@ -97,4 +162,5 @@ export const sidebarMenu = [
     icon: 'fas fa-user-circle',
     route: '/user-management',
   },
+  
 ];

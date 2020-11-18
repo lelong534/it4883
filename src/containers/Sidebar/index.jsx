@@ -59,7 +59,7 @@ const Sidebar = ({ collapsed, toggle }) => {
         );
       }
       return (
-        <SubMenu
+        <SubMenu 
           key={key}
           title={
             <span>
@@ -77,7 +77,7 @@ const Sidebar = ({ collapsed, toggle }) => {
   return (
     <Sider
       breakpoint="lg"
-      width={210}
+      width={260}
       collapsedWidth="80px"
       collapsible
       trigger={null}

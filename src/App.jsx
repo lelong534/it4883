@@ -4,6 +4,10 @@ import MainLayout from "./containers/MainLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import appRoute from "./pages/routes";
+import LogUser from './pages/LogUser';
+import LogWarn from './pages/LogWarn';
+import LogDrone from './pages/LogDrone';
+import LogProblem from './pages/LogProblem';
 
 const App = () => {
   return (
@@ -14,6 +18,10 @@ const App = () => {
         <Route>
           <MainLayout>{appRoute()}</MainLayout>
         </Route>
+        <Route path="/log-user" component={LogUser} />
+        <Route path="/log-drone" component={LogDrone} />
+        <Route path="/log-warn" component={LogWarn} />
+        <Route path="/log-problem" component={LogProblem} />
       </Switch>
     </BrowserRouter>
   );

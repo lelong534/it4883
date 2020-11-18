@@ -1,8 +1,15 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-
 import Dashboard from './Dashboard';
-
+import LogUser from './LogUser';
+import LogDrone from './LogDrone';
+import LogWarn from './LogWarn';
+import LogProblem from './LogProblem';
+import Check from './Check';
+import Report from './Report';
+import MetaData from './MetaData';
+import LogPayLoad from './LogPayLoad';
+import LogMetaData from './LogMetaData';
 export const routes = [
   {
     path: '/dashboard',
@@ -62,6 +69,50 @@ export const routes = [
     component: () => <div>Lịch sử hoạt động</div>,
   },
   {
+    path: '/log-user',
+    component: LogUser,
+  },
+  {
+    path: '/log-drone',
+    component: LogDrone,
+  },
+  {
+    path: '/log-problem',
+    component: LogProblem,
+  },
+  {
+    path: '/log-warn',
+    component: LogWarn,
+  },
+  {
+    path: '/log-payload',
+    component: LogPayLoad,
+  },
+  {
+    path: '/log-metadata',
+    component: LogMetaData,
+  },
+  {
+    path: '/function2',
+    component: () => <div>Nhóm chức năng 2</div>,
+  },
+  {
+    path: '/meta-data',
+    component: MetaData,
+  },
+  {
+    path: '/check',
+    component: Check,
+  },
+  {
+    path: '/report',
+    component: Report,
+  },
+  {
+    path: '/log-warn',
+    component: LogWarn,
+  },
+  {
     path: '/surveillance-domain',
     component: () => <div>Miền giám sát</div>,
   },
@@ -73,6 +124,7 @@ export const routes = [
     path: '/user-management',
     component: () => <div>Quản lý người dùng</div>,
   },
+  
 ];
 
 export default () => (
