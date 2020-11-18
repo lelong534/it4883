@@ -1,175 +1,145 @@
+import { Table, Input, Button, Space } from 'antd';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
-import { Table,BackTop} from 'antd';
-
 const data = [
   {
     key: '1',
     name: 'Drone1',
-    region:'Vùng A',
-    
+    address: 'Vùng A',
   },
   {
     key: '2',
     name: 'Drone2',
-    region:'Vùng A',
+   
+    address: 'Vùng B',
   },
   {
     key: '3',
-    name: 'Drone2',
-    region:'Vùng B',
+    name: 'Drone3',
+
+    address: 'Vùng C',
   },
   {
     key: '4',
     name: 'Drone1',
-    region:'Vùng C',
+    address: 'Vùng C',
   },
   {
     key: '5',
     name: 'Drone2',
-    region:'Vùng C',
-    
+    address: 'Vùng A',
   },
   {
     key: '6',
-    name: 'Drone1',
-    region:'Vùng S',
-    
+    name: 'Drone2',
+    address: 'Vùng C',
   },
   {
     key: '7',
-    name: 'Drone2',
-    region:'Vùng S',
+    name: 'Drone3',
+    address: 'Vùng B',
   },
   {
     key: '8',
     name: 'Drone3',
-    region:'Vùng A',
-   
-  },
-  {
-    key: '9',
-    name: 'Drone2',
-    region:'Vùng A',
-   
-  },
-  {
-    key: '10',
-    name: 'Drone3',
-    region:'Vùng B',
-    
-  },
-  {
-    key: '11',
-    name: 'Drone3',
-    region:'Vùng C',
-  },
-  {
-    key: '12',
-    name: 'Drone2',
-    region:'Vùng C',
-
-  },
-  {
-    key: '13',
-    name: 'Drone1',
-    region:'Vùng A',
-    
-  },
-  {
-    key: '14',
-    name: 'Drone1',
-    region:'Vùng A',
-   
-  },
-  {
-    key: '15',
-    name: 'Drone1',
-    region:'Vùng A',
-  
-  },
-  {
-    key: '16',
-    name: 'Drone1',
-    region:'Vùng A',
+    address: 'Vùng A',
   },
 ];
 
 class App extends React.Component {
   state = {
-    filteredInfo: null,
-    sortedInfo: null,
+    searchText: '',
+    searchedColumn: '',
   };
 
-  handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select(), 100);
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
     this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter,
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
     });
   };
 
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
   };
-
-  clearAll = () => {
-    this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
-    });
-  };
-
 
   render() {
-    let { sortedInfo, filteredInfo } = this.state;
-    sortedInfo = sortedInfo || {};
-    filteredInfo = filteredInfo || {};
     const columns = [
       {
-        title: 'Tên drone',
+        title: 'Tên',
         dataIndex: 'name',
         key: 'name',
-        filters: [
-          { text: 'Drone1', value: 'Drone1' },
-          { text: 'Drone2', value: 'Drone2' },
-          { text: 'Drone3', value: 'Drone3' },
-        ],
-        filteredValue: filteredInfo.name || null,
-        onFilter: (value, record) => record.name.includes(value),
-        sorter: (a, b) => a.name.length - b.name.length,
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-        ellipsis: true,
+        width: '50%',
+        ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Miền hoạt động',
-        dataIndex: 'region',
-        key: 'region',
-        filters: [
-          { text: 'Vùng A', value: 'Vùng A' },
-          { text: 'Vùng B', value: 'Vùng B' },
-          { text: 'Vùng C', value: 'Vùng C' },
-          { text: 'Vùng S', value: 'Vùng S' },
-        ],
-        filteredValue: filteredInfo.region || null,
-        onFilter: (value, record) => record.region.includes(value),
-        sorter: (a, b) => a.region.length - b.region.length,
-        sortOrder: sortedInfo.columnKey === 'region' && sortedInfo.order,
-        ellipsis: true,
+        title: 'Miền giám sát',
+        dataIndex: 'address',
+        key: 'address',
+        ...this.getColumnSearchProps('address'),
       },
     ];
-    return (
-      <>
-        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
-      </>
-    );
+    return <Table columns={columns} dataSource={data} />;
   }
 }
 function LogDrone(){
-    return(
-        <>
-        <App />
-        <BackTop style={{color:'rgba(64, 64, 64, 0.6)'}} />
-        </>
-    );
-}
-export default LogDrone;
+  return(
+<App />
+  );
+  }
+  export default LogDrone;
