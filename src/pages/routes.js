@@ -17,6 +17,7 @@ import DroneState from './Drones/DroneState'
 import DroneStatistic from './Drones/DroneStatistic'
 import FlySetting from './Drones/FlySetting'
 import DroneConnectData from './Drones/DroneConnectData'
+import ImageVideo from './ImageVideo'
 
 export const routes = [
   {
@@ -62,7 +63,7 @@ export const routes = [
   },
   {
     path: '/metadata',
-    component: () => <div>Meta Data</div>,
+    component: () => <ImageVideo />,
   },
   {
     path: '/problem',
