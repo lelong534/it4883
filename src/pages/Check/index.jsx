@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import { DatePicker, Select, Space, Button, Table, Tag, BackTop } from 'antd';
-import {Form} from 'react-bootstrap';
 
 const columns = [
     {
@@ -119,7 +118,7 @@ function Check() {
     const [open,setOpen] = useState(false);
   return (
       <>
-  <Form></Form>
+  
       <p>Chọn thời gian muốn kiểm tra</p>
     <Space direction="vertical" size={12}>
     <RangePicker />
