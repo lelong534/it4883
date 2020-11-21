@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import { DatePicker, Select, Space, Button, Table, Tag, BackTop } from 'antd';
-
+import { DatePicker, Select, Space,Table, Tag, BackTop} from 'antd';
+import {Button,Collapse} from 'react-bootstrap';
 const columns = [
     {
       title: 'Name',
@@ -148,8 +148,9 @@ function Check() {
   <Button type="primary" onClick={() => setOpen(!open)} >Tra cứu</Button>
   <br/>
   <br/>
-  <Table in={open} columns={columns} dataSource={data} />
-
+  <Collapse  in={open} >
+  <Table columns={columns} dataSource={data} />
+</Collapse>
    <BackTop />
    </>
   );
