@@ -145,11 +145,17 @@ function Check() {
   </Select>
   <br/>
   <br/>
-  <Button type="primary" onClick={() => setOpen(!open)} >Tra cứu</Button>
+  <Button type="primary" 
+  onClick={() => setOpen(!open)}
+  aria-controls="example-collapse-text"
+  aria-expanded={open}
+   >Tra cứu</Button>
   <br/>
   <br/>
   <Collapse  in={open} >
+  <div id="example-collapse-text">
   <Table columns={columns} dataSource={data} />
+  </div>
 </Collapse>
    <BackTop />
    </>

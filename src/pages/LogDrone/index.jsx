@@ -1,107 +1,119 @@
-import { Table, Input, Button, Space,Modal,DatePicker,Form,Tag } from 'antd';
+import { Table, Input, Button, Space,Modal,DatePicker,Form} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
 const data = [
   {
     key: '1',
+    id:'1',
     name: 'Drone1',
-    address: 'Vùng A',
-    tags: ['add', 'edited info'],
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '2',
-    name: 'Drone2',
-   
-    address: 'Vùng B',
-    tags: ['delete'],
+    id:'2',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '3',
-    name: 'Drone3',
-
-    address: 'Vùng C',
-    tags: ['add', 'edited info'],
+    id:'3',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '4',
+    id:'4',
     name: 'Drone1',
-    address: 'Vùng C',
-    tags: ['delete'],
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '5',
-    name: 'Drone2',
-    address: 'Vùng A',
-    tags: ['delete'],
+    id:'5',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '6',
-    name: 'Drone2',
-    address: 'Vùng C',
-    tags: ['delete'],
+    id:'6',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '7',
-    name: 'Drone3',
-    address: 'Vùng B',
-    tags: ['delete'],
+    id:'7',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '8',
-    name: 'Drone3',
-    address: 'Vùng A',
-    tags: ['add', 'edited info'],
+    id:'8',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '9',
+    id:'9',
     name: 'Drone1',
-    address: 'Vùng A',
-    tags: ['add', 'edited info'],
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '10',
-    name: 'Drone2',
-   
-    address: 'Vùng B',
-    tags: ['delete'],
+    id:'10',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '11',
-    name: 'Drone3',
-
-    address: 'Vùng C',
-    tags: ['add', 'edited info'],
+    id:'11',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '12',
+    id:'12',
     name: 'Drone1',
-    address: 'Vùng C',
-    tags: ['delete'],
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '13',
-    name: 'Drone2',
-    address: 'Vùng A',
-    tags: ['delete'],
+    id:'13',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '14',
-    name: 'Drone2',
-    address: 'Vùng C',
-    tags: ['delete'],
-  },
-  {
-    key: '15',
-    name: 'Drone3',
-    address: 'Vùng B',
-    tags: ['delete'],
-  },
-  {
-    key: '16',
-    name: 'Drone3',
-    address: 'Vùng A',
-    tags: ['add', 'edited info'],
+    id:'14',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
 ];
 const { RangePicker } = DatePicker;
@@ -181,37 +193,34 @@ class TableDrone extends React.Component {
   render() {
     const columns = [
       {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
+        ...this.getColumnSearchProps('id'),
+      },
+      {
         title: 'Tên',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Miền giám sát',
-        dataIndex: 'address',
-        key: 'address',
-        ...this.getColumnSearchProps('address'),
+        title: 'Type',
+        dataIndex: 'type',
+        key: 'type',
+        ...this.getColumnSearchProps('type'),
       },
       {
-        title: 'Lịch sử hoạt động',
-        key: 'tags',
-        dataIndex: 'tags',
-        ...this.getColumnSearchProps('tags'),
-        render: tags => (
-          <>
-            {tags.map(tag => {
-              let color = tag.length > 5 ? 'geekblue' : 'green';
-              if (tag === 'delete') {
-                color = 'volcano';
-              }
-              return (
-                <Tag color={color} key={tag}>
-                  {tag.toUpperCase()}
-                </Tag>
-              );
-            })}
-          </>
-        ),
+        title: 'Miêu tả',
+        key: 'description',
+        dataIndex: 'description',
+        ...this.getColumnSearchProps('description'),
+      },
+      {
+        title: 'Thời gian',
+        key: 'time',
+        dataIndex: 'time',
+        ...this.getColumnSearchProps('time'),
       },
      
     ];
