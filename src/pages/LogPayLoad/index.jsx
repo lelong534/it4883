@@ -1,227 +1,290 @@
+import { Table, Input, Button, Space,Modal,DatePicker,Form} from 'antd';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
-import { Table,BackTop} from 'antd';
-
 const data = [
   {
     key: '1',
-    name: 'John Brown',
-    time: '3',
-    role:'Giám sát viên',
-    address: 'New York No. 1 Lake Park',
+    id:'1',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '2',
-    name: 'Jim Green',
-    role:'Kỹ thuật viên',
-    time:'5',
-    address: 'London No. 1 Lake Park',
+    id:'2',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '3',
-    name: 'Joe Black',
-    role:'Nhân viên quản lý',
-    time: '1',
-    address: 'Sidney No. 1 Lake Park',
+    id:'3',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '4',
-    name: 'Jim Red',
-    role:'Nhân viên chăm sóc cây',
-    time: '12',
-    address: 'London No. 2 Lake Park',
+    id:'4',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '5',
-    name: 'Jim Red',
-    role:'Nhân viên chăm sóc cây',
-    time: '2',
-    address: 'London No. 2 Lake Park',
+    id:'5',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '6',
-    name: 'Jim Red',
-    role:'Nhân viên quản lý',
-    time: '2',
-    address: 'London No. 2 Lake Park',
+    id:'6',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '7',
-    name: 'Jim Red',
-    role:'Nhân viên quản lý',
-    time: '12',
-    address: 'London No. 2 Lake Park',
+    id:'7',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '8',
-    name: 'Jim Red',
-    role:'Nhân viên quản lý',
-    time: '9',
-    address: 'London No. 2 Lake Park',
+    id:'8',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '9',
-    name: 'Jim Blue',
-    role:'Nhân viên quản lý',
-    time: '2',
-    address: 'London No. 2 Lake Park',
+    id:'9',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '10',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '10',
-    address: 'London No. 2 Lake Park',
+    id:'10',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '11',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '10',
-    address: 'London No. 2 Lake Park',
+    id:'11',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '12',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '10',
-    address: 'London No. 2 Lake Park',
+    id:'12',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '13',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '10',
-    address: 'London No. 2 Lake Park',
+    id:'13',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '14',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '10',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '15',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '10',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '16',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '10',
-    address: 'London No. 2 Lake Park',
+    id:'14',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
 ];
+const { RangePicker } = DatePicker;
 
-class App extends React.Component {
+class TableDrone extends React.Component {
+  
   state = {
-    filteredInfo: null,
-    sortedInfo: null,
+    searchText: '',
+    searchedColumn: '',
   };
 
-  handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select(), 100);
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
     this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter,
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
     });
   };
 
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
-  };
-
-  clearAll = () => {
-    this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
-    });
-  };
-
-  setAgeSort = () => {
-    this.setState({
-      sortedInfo: {
-        order: 'descend',
-        columnKey: 'time',
-      },
-    });
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
   };
 
   render() {
-    let { sortedInfo, filteredInfo } = this.state;
-    sortedInfo = sortedInfo || {};
-    filteredInfo = filteredInfo || {};
     const columns = [
+      {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
+        ...this.getColumnSearchProps('id'),
+      },
       {
         title: 'Tên',
         dataIndex: 'name',
         key: 'name',
-        filters: [
-          { text: 'Joe', value: 'Joe' },
-          { text: 'Jim', value: 'Jim' },
-        ],
-        filteredValue: filteredInfo.name || null,
-        onFilter: (value, record) => record.name.includes(value),
-        sorter: (a, b) => a.name.length - b.name.length,
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-        ellipsis: true,
+        ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Vai trò',
-        dataIndex: 'role',
-        key: 'role',
-        filters: [
-          { text: 'Giám sát viên', value: 'Giám sát viên' },
-          { text: 'Nhân viên quản lý ', value: 'Nhân viên quản lý' },
-          { text: 'Kỹ thuật viên', value: 'Kỹ thuật viên' },
-          { text: 'Nhân viên chăm sóc cây trồng', value: 'Nhân viên chăm sóc cây trồng' },
-         
-        ],
-        filteredValue: filteredInfo.role || null,
-        onFilter: (value, record) => record.role.includes(value),
-        sorter: (a, b) => a.role.length - b.role.length,
-        sortOrder: sortedInfo.columnKey === 'role' && sortedInfo.order,
-        ellipsis: true,
+        title: 'Type',
+        dataIndex: 'type',
+        key: 'type',
+        ...this.getColumnSearchProps('type'),
       },
       {
-        title: 'Thời gian (Năm 2020)',
-        dataIndex: 'time',
+        title: 'Miêu tả',
+        key: 'description',
+        dataIndex: 'description',
+        ...this.getColumnSearchProps('description'),
+      },
+      {
+        title: 'Thời gian',
         key: 'time',
-        sorter: (a, b) => a.time - b.time,
-        sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
-        ellipsis: true,
+        dataIndex: 'time',
+        ...this.getColumnSearchProps('time'),
       },
-      {
-        title: 'Địa điểm',
-        dataIndex: 'address',
-        key: 'address',
-        filters: [
-          { text: 'London', value: 'London' },
-          { text: 'New York', value: 'New York' },
-        ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
-        ellipsis: true,
-      },
+     
     ];
+    return <Table columns={columns} dataSource={data} />;
+  }
+}
+class App extends React.Component{
+  state = { visible: false };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  render() {
     return (
       <>
-        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+       <div >
+          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+        </div>
+        
+        <br/>
+        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+       <Space direction="vertical" size={12}>
+    <RangePicker />
+    
+  </Space >
+  </Form>
+  <br/>
+  <br/>
+        <Button type="primary" onClick={this.showModal} htmlType="submit">
+          Log
+        </Button>
+        <Modal
+          title="Lịch sử hoạt động của drone"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          width={1000}
+        >
+          <TableDrone />
+        </Modal>
       </>
     );
   }
 }
 function LogPayLoad(){
-    return(
-        <>
-        <App />
-        <BackTop style={{color:'rgba(64, 64, 64, 0.6)'}} />
-        </>
-    );
-}
-export default LogPayLoad;
+  return(
+<App />
+  );
+  }
+  export default LogPayLoad;

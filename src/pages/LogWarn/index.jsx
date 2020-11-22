@@ -1,222 +1,290 @@
+import { Table, Input, Button, Space,Modal,DatePicker,Form} from 'antd';
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
-import { Table,BackTop} from 'antd';
-
 const data = [
   {
     key: '1',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'1',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '2',
-    name: 'Cây bị héo',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'2',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '3',
-    name: 'Ngập úng',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'3',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '4',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 4',
-    address: 'Vùng B',
+    id:'4',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '5',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'5',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '6',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'6',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '7',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'7',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '8',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'8',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '9',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'9',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '10',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'10',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '11',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'11',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '12',
-    name: 'Sâu bệnh',
-    time: '3',
-    level:'Mức 1',
-    address: 'Vùng A',
+    id:'12',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '13',
-    name: 'Sâu bệnh',
-    time: '1',
-    level:'Mức 5',
-    address: 'Vùng S',
+    id:'13',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
   {
     key: '14',
-    name: 'Thiếu nước',
-    time: '9',
-    level:'Mức 1',
-    address: 'Vùng S',
-  },
-  {
-    key: '15',
-    name: 'Sâu bệnh',
-    time: '6',
-    level:'Mức 3',
-    address: 'Vùng B',
-  },
-  {
-    key: '16',
-    name: 'Cây bị héo',
-    time: '4',
-    level:'Mức 2',
-    address: 'Vùng A',
+    id:'14',
+    name: 'Drone1',
+  type:'Delete',
+  description:'Delete Description',
+  time:'21:00 11/19/2020'
   },
 ];
+const { RangePicker } = DatePicker;
 
-class App extends React.Component {
+class TableDrone extends React.Component {
+  
   state = {
-    filteredInfo: null,
-    sortedInfo: null,
+    searchText: '',
+    searchedColumn: '',
   };
 
-  handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select(), 100);
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
     this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter,
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
     });
   };
 
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
   };
 
-  clearAll = () => {
-    this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
-    });
-  };
-
-  setAgeSort = () => {
-    this.setState({
-      sortedInfo: {
-        order: 'descend',
-        columnKey: 'time',
+  render() {
+    const columns = [
+      {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
+        ...this.getColumnSearchProps('id'),
       },
+      {
+        title: 'Tên',
+        dataIndex: 'name',
+        key: 'name',
+        ...this.getColumnSearchProps('name'),
+      },
+      {
+        title: 'Type',
+        dataIndex: 'type',
+        key: 'type',
+        ...this.getColumnSearchProps('type'),
+      },
+      {
+        title: 'Miêu tả',
+        key: 'description',
+        dataIndex: 'description',
+        ...this.getColumnSearchProps('description'),
+      },
+      {
+        title: 'Thời gian',
+        key: 'time',
+        dataIndex: 'time',
+        ...this.getColumnSearchProps('time'),
+      },
+     
+    ];
+    return <Table columns={columns} dataSource={data} />;
+  }
+}
+class App extends React.Component{
+  state = { visible: false };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
     });
   };
 
   render() {
-    let { sortedInfo, filteredInfo } = this.state;
-    sortedInfo = sortedInfo || {};
-    filteredInfo = filteredInfo || {};
-    const columns = [
-      {
-        title: 'Cảnh báo',
-        dataIndex: 'name',
-        key: 'name',
-        filters: [
-          { text: 'Sâu bệnh', value: 'Sâu bệnh' },
-          { text: 'Thiếu nước', value: 'Thiếu nước' },
-          { text: 'Ngập úng', value: 'Ngập úng' },
-          { text: 'Cây bị héo', value: 'Cây bị héo' },
-          { text: 'Cây bị đổ', value: 'Cây bị đổ' },
-         
-        ],
-        filteredValue: filteredInfo.name || null,
-        onFilter: (value, record) => record.name.includes(value),
-        sorter: (a, b) => a.name.length - b.name.length,
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-        ellipsis: true,
-      },
-      {
-        title: 'Thời gian (Năm 2020)',
-        dataIndex: 'time',
-        key: 'time',
-        sorter: (a, b) => a.time - b.time,
-        sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
-        ellipsis: true,
-      },
-      {
-        title: 'Mức độ cảnh báo',
-        dataIndex: 'level',
-        key: 'level',
-        
-      },
-      {
-        title: 'Miền xảy ra cảnh báo',
-        dataIndex: 'address',
-        key: 'address',
-        filters: [
-          { text: 'Vùng A', value: 'Vùng A' },
-          { text: 'Vùng B', value: 'Vùng B' },
-          { text: 'Vùng C', value: 'Vùng C' },
-          { text: 'Vùng S', value: 'Vùng S' },
-        ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
-        ellipsis: true,
-      },
-    ];
     return (
       <>
-        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+       <div >
+          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+        </div>
+        
+        <br/>
+        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+       <Space direction="vertical" size={12}>
+    <RangePicker />
+    
+  </Space >
+  </Form>
+  <br/>
+  <br/>
+        <Button type="primary" onClick={this.showModal} htmlType="submit">
+          Log
+        </Button>
+        <Modal
+          title="Lịch sử hoạt động của drone"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+          width={1000}
+        >
+          <TableDrone />
+        </Modal>
       </>
     );
   }
 }
 function LogWarn(){
-    return(
-        <>
-        <App />
-        <BackTop style={{color:'rgba(64, 64, 64, 0.6)'}} />
-        </>
-    );
-}
-export default LogWarn;
+  return(
+<App />
+  );
+  }
+  export default LogWarn;
