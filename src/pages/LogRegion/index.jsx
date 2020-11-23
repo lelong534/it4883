@@ -6,7 +6,7 @@ const data = [
   {
     key: '1',
     id:'1',
-    name: 'Payload1',
+    name: 'A',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -15,7 +15,7 @@ status:'Đang hoạt động'
   {
     key: '2',
     id:'2',
-    name: 'Payload1',
+    name: 'B',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -24,7 +24,7 @@ status:'Đang hoạt động'
   {
     key: '3',
     id:'3',
-    name: 'Payload1',
+    name: 'C',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -33,7 +33,7 @@ status:'Đang hoạt động'
   {
     key: '4',
     id:'4',
-    name: 'Payload1',
+    name: 'A',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -325,7 +325,7 @@ class TablePayload extends React.Component {
         ...this.getColumnSearchProps('id'),
       },
       {
-        title: 'Tên',
+        title: 'Miền giám sát',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
@@ -393,16 +393,11 @@ class App extends React.Component{
           }
         >
  <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+         Kiểm tra lịch sử hoạt động của miền giám sát
         </h1>
         
-        <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-    <RangePicker />
-    
-  </Space >
-  </Form>
+     
+       
   <br/>
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">
@@ -428,7 +423,7 @@ class App extends React.Component{
     );
   }
 }
-function LogPayLoad(){
+function LogRegion(){
   return(
     <>
 <App />
@@ -436,4 +431,4 @@ function LogPayLoad(){
 </>
   );
   }
-  export default LogPayLoad;
+  export default LogRegion;

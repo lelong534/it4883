@@ -393,16 +393,10 @@ class App extends React.Component{
           }
         >
  <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+          Lịch sử kết nối UAV
         </h1>
         
-        <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-    <RangePicker />
-    
-  </Space >
-  </Form>
+       
   <br/>
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">
@@ -428,7 +422,7 @@ class App extends React.Component{
     );
   }
 }
-function LogPayLoad(){
+function LogUAV(){
   return(
     <>
 <App />
@@ -436,4 +430,4 @@ function LogPayLoad(){
 </>
   );
   }
-  export default LogPayLoad;
+  export default LogUAV;

@@ -10,6 +10,11 @@ import Report from './Report';
 import MetaData from './MetaData';
 import LogPayLoad from './LogPayLoad';
 import LogMetaData from './LogMetaData';
+import LogIncident from './LogIncident';
+import LogObjMonitor from './LogObjMonitor';
+import LogRegion from './LogRegion';
+import LogStatistic from './LogStatistic';
+import LogUAV from './LogUAV';
 export const routes = [
   {
     path: '/dashboard',
@@ -91,6 +96,26 @@ export const routes = [
   {
     path: '/log-metadata',
     component: LogMetaData,
+  },
+  {
+    path: '/log-incident',
+    component: LogIncident,
+  },
+  {
+    path: '/log-objmonitor',
+    component: LogObjMonitor,
+  },
+  {
+    path: '/log-region',
+    component: LogRegion,
+  },
+  {
+    path: '/log-statistic',
+    component: LogStatistic,
+  },
+  {
+    path: '/log-uav',
+    component: LogUAV,
   },
   {
     path: '/function2',

@@ -116,6 +116,7 @@ function onSearch(val) {
 
 function Check() {
     const [open,setOpen] = useState(false);
+    const [selectedZone, setSelectedZone] = useState("");
   return (
       <>
   
@@ -131,7 +132,7 @@ function Check() {
     style={{ width: 200 }}
     placeholder="Chọn miền kiểm tra"
     optionFilterProp="children"
-    onChange={onChange}
+    onChange={(value) => {setSelectedZone(value);console.log(value); }}
     onFocus={onFocus}
     onBlur={onBlur}
     onSearch={onSearch}
@@ -146,17 +147,17 @@ function Check() {
   <br/>
   <br/>
   <Button type="primary" 
-  onClick={() => setOpen(!open)}
+  onClick={() =>{selectedZone && setOpen(!open);} }
   aria-controls="example-collapse-text"
   aria-expanded={open}
    >Tra cứu</Button>
   <br/>
   <br/>
-  <Collapse  in={open} >
-  <div id="example-collapse-text">
+  
+  <div id="example-collapse-text" style={{display:open?"block":"none" }}>
   <Table columns={columns} dataSource={data} />
   </div>
-</Collapse>
+
    <BackTop />
    </>
   );

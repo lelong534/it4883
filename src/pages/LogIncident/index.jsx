@@ -1,4 +1,4 @@
-import { Table, Input, Button, Space,BackTop,DatePicker,Form,Col,Card} from 'antd';
+import { Table, Input, Button, Space,BackTop,Col,Card} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
@@ -6,34 +6,34 @@ const data = [
   {
     key: '1',
     id:'1',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
-status:'Đang hoạt động'
+status:'Đã xử lý'
   },
   {
     key: '2',
     id:'2',
-    name: 'Payload1',
+    name: 'Ngập úng',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
-  status:'Đang hoạt động'
+  status:'Đang xử lý'
   },
   {
     key: '3',
     id:'3',
-    name: 'Payload1',
+    name: 'Hạn hán',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+ status:'Chưa xử lý'
   },
   {
     key: '4',
     id:'4',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -42,7 +42,7 @@ status:'Đang hoạt động'
   {
     key: '5',
     id:'5',
-    name: 'Payload1',
+    name: 'Héo úa',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -51,7 +51,7 @@ status:'Đang hoạt động'
   {
     key: '6',
     id:'6',
-    name: 'Payload1',
+    name: 'Gãy đổ',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -60,7 +60,7 @@ status:'Đang hoạt động'
   {
     key: '7',
     id:'7',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -69,7 +69,7 @@ status:'Đang hoạt động'
   {
     key: '8',
     id:'8',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -78,7 +78,7 @@ status:'Đang hoạt động'
   {
     key: '9',
     id:'9',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -87,7 +87,7 @@ status:'Đang hoạt động'
   {
     key: '10',
     id:'10',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -96,7 +96,7 @@ status:'Đang hoạt động'
   {
     key: '11',
     id:'11',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -105,7 +105,7 @@ status:'Đang hoạt động'
   {
     key: '12',
     id:'12',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -114,7 +114,7 @@ status:'Đang hoạt động'
   {
     key: '13',
     id:'13',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020'
@@ -122,13 +122,13 @@ status:'Đang hoạt động'
   {
     key: '14',
     id:'14',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020'
   },
 ];
-const { RangePicker } = DatePicker;
+
 
 class TablePayloadActivity extends React.Component {
   
@@ -393,16 +393,11 @@ class App extends React.Component{
           }
         >
  <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+         Lịch sử xử lý sự cố
         </h1>
         
         <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-    <RangePicker />
-    
-  </Space >
-  </Form>
+        
   <br/>
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">
@@ -428,7 +423,7 @@ class App extends React.Component{
     );
   }
 }
-function LogPayLoad(){
+function LogIncident(){
   return(
     <>
 <App />
@@ -436,4 +431,4 @@ function LogPayLoad(){
 </>
   );
   }
-  export default LogPayLoad;
+  export default LogIncident;

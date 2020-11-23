@@ -1,6 +1,7 @@
-import { Table, Input, Button, Space,BackTop,DatePicker,Form,Col,Card} from 'antd';
+import { Table, Input, Button, Space,BackTop,Col,Card} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import { Line } from '@ant-design/charts';
 import React from 'react';
 const data = [
   {
@@ -128,7 +129,35 @@ status:'Đang hoạt động'
   time:'21:00 11/19/2020'
   },
 ];
-const { RangePicker } = DatePicker;
+class Report extends React.Component {
+    render() {
+      const data = [
+        { month: '1', status: 3 },
+        { month: '2', status: 4 },
+        { month: '3', status: 3.5 },
+        { month: '4', status: 5 },
+        { month: '5', status: 4.9 },
+        { month: '6', status: 6 },
+        { month: '7', status: 7 },
+        { month: '8', status: 9 },
+        { month: '9', status: 13 },
+        { month: '10', status: 14 },
+        { month: '11', status: 15},
+        { month: '12', status: 16 },
+      ];
+      const config = {
+        data,
+        height: 400,
+        xField: 'month',
+        yField: 'status',
+        point: {
+          size: 5,
+          shape: 'diamond',
+        },
+      };
+      return <Line {...config} style={{height:500}} />;
+    }
+  }
 
 class TablePayloadActivity extends React.Component {
   
@@ -385,24 +414,14 @@ class App extends React.Component{
             hoverable
           style={{ width: '100',marginLeft:40 }}
           cover={
-            <img
-            style={{height:400}}
-              alt="example"
-              src="https://store.hp.com/app/assets/images/uploads/prod/how-to-operate-drone-camera-hero1563465531828438.jpg"
-            />
+            <Report/>
           }
         >
  <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+          Lịch sử báo cáo, thống kê
         </h1>
         
-        <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-    <RangePicker />
-    
-  </Space >
-  </Form>
+        
   <br/>
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">
@@ -428,7 +447,7 @@ class App extends React.Component{
     );
   }
 }
-function LogPayLoad(){
+function LogStatistic(){
   return(
     <>
 <App />
@@ -436,4 +455,4 @@ function LogPayLoad(){
 </>
   );
   }
-  export default LogPayLoad;
+  export default LogStatistic;

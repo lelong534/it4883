@@ -6,7 +6,7 @@ const data = [
   {
     key: '1',
     id:'1',
-    name: 'Payload1',
+    name: 'Drone1',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -15,7 +15,7 @@ status:'Đang hoạt động'
   {
     key: '2',
     id:'2',
-    name: 'Payload1',
+    name: 'Drone1',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -393,7 +393,7 @@ class App extends React.Component{
           }
         >
  <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động của đối tượng giám sát
         </h1>
         
         <br/>
@@ -428,7 +428,7 @@ class App extends React.Component{
     );
   }
 }
-function LogPayLoad(){
+function LogObjMonitor(){
   return(
     <>
 <App />
@@ -436,4 +436,4 @@ function LogPayLoad(){
 </>
   );
   }
-  export default LogPayLoad;
+  export default LogObjMonitor;
