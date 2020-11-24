@@ -1,115 +1,307 @@
 import React from "react";
-
+import { Table, Tag, Modal, Button, DatePicker } from 'antd';
+const { RangePicker } = DatePicker;
 export default function CaregiverCoordinate() {
     return <CoordinateCaregiver></CoordinateCaregiver>
 }
 
-function CoordinateCaregiver() {
-    return (
-        <div className="bg-white h-100">
-            <table className="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên sự cố</th>
-                        <th scope="col">mã sự cố</th>
-                        <th scope="col">Loại sự cố</th>
-                        <th scope="col">Trạng thái xử lý</th>
-                        <th scope="col">Người xử lý</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Sự cố sâu bệnh 1</td>
-                        <td>SC012</td>
-                        <td>Sâu bệnh</td>
-                        <td>Chưa xử lý</td>
-                        <td>
-                            <SelectPerson></SelectPerson>
-                        </td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Sự cố sâu bệnh 2</td>
-                        <td>SC013</td>
-                        <td>Sâu bệnh</td>
-                        <td>Chưa xử lý</td>
-                        <td>
-                            <SelectPerson></SelectPerson>
-                        </td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Sự cố ngập úng 1</td>
-                        <td>SC014</td>
-                        <td>Ngập úng</td>
-                        <td>Chưa xử lý</td>
-                        <td>
-                            <SelectPerson></SelectPerson>
-                        </td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Sự cố ngập úng 2</td>
-                        <td>SC015</td>
-                        <td>Ngập úng</td>
-                        <td>Chưa xử lý</td>
-                        <td>
-                            <SelectPerson></SelectPerson>
-                        </td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>sự cố héo úa</td>
-                        <td>SC016</td>
-                        <td>Héo úa</td>
-                        <td>Chưa xử lý</td>
-                        <td>
-                           <SelectPerson></SelectPerson>
-                        </td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button className="btn btn-primary m-3">Điều phối người xử lý sự cố</button>
-        </div>
-    )
+class CoordinateCaregiver extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            data : [
+                {
+                    key: '0',
+                    order: '1',
+                    problemType: 'Sâu bệnh',
+                    problemId: 'SC01',
+                    problemInfo: 'Xem chi tiết',
+                    processPerson: '',
+                    deadline: '',
+                    processStatus: 'Chưa điều phối',
+                    reportUrl: "/problem-report",
+                },
+                {
+                    key: '1',
+                    order: '2',
+                    problemType: 'Sâu bệnh',
+                    problemId: 'SC02',
+                    problemInfo: 'Nguyễn Văn Nam',
+                    processPerson: 'Trần Thị Thảo',
+                    deadline: '23/11/2020 - 25/11/2020',
+                    processStatus: 'Đã điều phối',
+                    reportUrl: "/problem-report",
+                },
+                {
+                    key: '2',
+                    order: '3',
+                    problemType: 'Ngập úng',
+                    problemId: 'SC03',
+                    problemInfo: 'Nguyễn Văn Nam',
+                    processPerson: 'Trần Thị Thảo',
+                    deadline: '23/11/2020 - 25/11/2020',
+                    processStatus: 'Đã điều phối',
+                    reportUrl: "/problem-report",
+                },
+                {
+                    key: '3',
+                    order: '4',
+                    problemType: 'Chặt phá',
+                    problemId: 'SC04',
+                    proceproblemInfossPerson: 'Nguyễn Văn Nam',
+                    processPerson: '',
+                    deadline: '',
+                    processStatus: 'Chưa điều phối',
+                    reportUrl: "/problem-report",
+                },
+                {
+                    key: '4',
+                    order: '5',
+                    problemType: 'Gãy đổ',
+                    problemId: 'SC05',
+                    problemInfo: 'Nguyễn Văn Nam',
+                    processPerson: '',
+                    deadline: '',
+                    processStatus: 'Chưa điều phối',
+                    reportUrl: "/problem-report",
+                },
+            ],
+        };
+    }
+    updateData = (index, processPerson, deadline, processStatus) => {
+        console.log("kkkkkkkkkkk " +index);
+        this.state.data[index].processPerson = processPerson;
+        this.state.data[index].deadline = deadline;
+        this.state.data[index].processStatus = processStatus;
+        this.setState({data: this.state.data});
+    }
+    render() {
+        const columns = [
+            {
+                title: 'Stt',
+                dataIndex: 'order',
+                sorter: {
+                    compare: (a, b) => a.order - b.order,
+                },
+            },
+            {
+                title: 'Loại sự cố',
+                dataIndex: 'problemType',
+                sorter: {
+                    compare: (a, b) => a.problemType - b.problemType,
+                },
+            },
+            {
+                title: 'Mã sự cố',
+                dataIndex: 'problemId',
+                sorter: {
+                    compare: (a, b) => a.orderPerson - b.orderPerson,
+                },
+            },
+            {
+                title: 'Thông tin sự cố',
+                dataIndex: 'problemInfo',
+                sorter: {
+                    compare: (a, b) => a.processPerson - b.processPerson,
+                },
+                render: problemInfo => <a href="/">Xem chi tiết</a>
+            },
+            {
+                title: 'Người xử lý',
+                dataIndex: 'processPerson',
+                sorter: {
+                    compare: (a, b) => a.deadline - b.deadline,
+                },
+            },
+            {
+                title: 'Hạn công việc',
+                dataIndex: 'deadline',
+                sorter: {
+                    compare: (a, b) => a.deadline - b.deadline,
+                },
+            },
+            {
+                title: 'Trạng thái điều phối',
+                dataIndex: 'processStatus',
+                sorter: {
+                    compare: (a, b) => a.processStatus - b.processStatus,
+                },
+                render: processStatus => <Tag color={processStatus == "Đã điều phối" ? "green" : "volcano"}>{processStatus}</Tag>,
+            },
+            {
+                title: 'Điều phối',
+                dataIndex: 'key',
+                render: key => <OrderModal index={key}  updateData = {this.updateData}/>,
+            },
+        ];
+        return (
+            <div>
+                <h2>Điều phối xử lý sự cố</h2>
+                <Table columns={columns} dataSource={this.state.data} onChange={onChange}/>
+            </div>
+        )
+    }
 }
 
-function SelectPerson() {
-    return (
-        <select class="custom-select">
-            <option selected>Chọn người xử lý</option>
-            <option value="1">NXLSC001</option>
-            <option value="2">NXLSC002</option>
-            <option value="3">NXLSC003</option>
-            <option value="4">NXLSC004</option>
-            <option value="5">NXLSC005</option>
-        </select>
-    )
+
+function onChange(pagination, filters, sorter, extra) {
+    console.log('params', pagination, filters, sorter, extra);
+}
+
+const columns = [
+    {
+        title: 'Stt',
+        dataIndex: 'order',
+        sorter: {
+            compare: (a, b) => a.order - b.order,
+        },
+    },
+    {
+        title: 'Người xử lý',
+        dataIndex: 'processPerson',
+        sorter: {
+            compare: (a, b) => a.problemType - b.problemType,
+        },
+    },
+    {
+        title: 'Mã Id',
+        dataIndex: 'personId',
+        sorter: {
+            compare: (a, b) => a.orderPerson - b.orderPerson,
+        },
+    },
+    {
+        title: 'Trạng thái hoạt động',
+        dataIndex: 'personStatus',
+        sorter: {
+            compare: (a, b) => a.processPerson - b.processPerson,
+        },
+        render: personStatus => <Tag color={personStatus == "Đang chờ điều phối" ? "green" : "volcano"}>{personStatus}</Tag>,
+    },
+];
+const data = [
+    {
+        key: '1',
+        order: '1',
+        processPerson: 'Trần Văn An',
+        personId: 'NXL01',
+        personStatus: 'Đang xử lý sự cố'
+    },
+    {
+        key: '2',
+        order: '2',
+        processPerson: 'Hoàng Văn Hùng',
+        personId: 'NXL02',
+        personStatus: 'Đang xử lý sự cố'
+    },
+    {
+        key: '3',
+        order: '3',
+        processPerson: 'Trần Thị Nhàn',
+        personId: 'NXL03',
+        personStatus: 'Đang chờ điều phối'
+    },
+    {
+        key: '4',
+        order: '4',
+        processPerson: 'Trần Văn Đức',
+        personId: 'NXL04',
+        personStatus: 'Đang chờ điều phối'
+    },
+    {
+        key: '5',
+        order: '5',
+        processPerson: 'Trần Văn Kiên',
+        personId: 'NXL05',
+        personStatus: 'Đang xử lý sự cố'
+    },
+];
+
+class OrderModal extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            visible: false,
+            RangePicker: '',
+            personName: '',
+        }
+    }
+    setPersonName(personName){
+        this.setState({
+            personName: personName,
+        });
+    }
+    setRangePicker(RangePicker){
+        this.setState({
+            RangePicker: RangePicker,
+        }); 
+    }
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    };
+
+    handleOk = e => {
+        const index = this.props.index;
+        this.props.updateData(index, this.state.personName, this.state.RangePicker, 'Đã điều phối');
+        Modal.success({
+            content: 'Bạn đã điều phối thành công',
+        });
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    handleCancel = e => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    };
+
+    onRangePickerChange = (dates, dateStrings) => {
+        this.setRangePicker(dateStrings[0] + ' - ' + dateStrings[1]);
+    }
+
+    render() {
+        const rowSelection = {
+            onChange: (selectedRowKeys, selectedRows) => {
+                console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+                this.setPersonName(selectedRows[0].processPerson);
+            },
+        };
+        return (
+            <>
+                <Button type="primary" onClick={this.showModal}>
+                    Điều phối
+                </Button>
+                <Modal
+                    title="Điều phối người xử lý cho sự cố Sâu bệnh SC003 "
+                    visible={this.state.visible}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    width={1000}
+                >
+                    <div>
+                        <span>Chọn thời gian xử lý: </span>
+                        <RangePicker onChange={this.onRangePickerChange} format='DD/MM/YYYY'/>
+                    </div>
+
+                    <br />
+                    <span>Chọn người xử lý sự cố:</span>
+                    <Table
+                        columns={columns}
+                        dataSource={data}
+                        onChange={onChange}
+                        rowSelection={{
+                            type: 'radio',
+                            ...rowSelection,
+                        }}
+                    />
+                </Modal>
+            </>
+        );
+    }
 }

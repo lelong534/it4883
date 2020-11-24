@@ -1,4 +1,5 @@
 import React from "react";
+import { Table, Tag } from 'antd';
 
 export default function ResultTracking() {
     return <TrackResult></TrackResult>
@@ -6,100 +7,111 @@ export default function ResultTracking() {
 
 function TrackResult() {
     return (
-        <div className="bg-white h-100">
-            <table className="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên sự cố</th>
-                        <th scope="col">mã sự cố</th>
-                        <th scope="col">Loại sự cố</th>
-                        <th scope="col">Tiến độ</th>
-                        <th scope="col">Báo cáo</th>
-                        <th scope="col">Người xử lý</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Sự cố sâu bệnh 1</td>
-                        <td>SC012</td>
-                        <td>Sâu bệnh</td>
-                        <td>50%</td>
-                        <td>
-                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
-                        </td>
-                        <td>
-                            Nguyễn Văn Nam
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Sự cố sâu bệnh 2</td>
-                        <td>SC013</td>
-                        <td>Sâu bệnh</td>
-                        <td>50%</td>
-                        <td>
-                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
-                        </td>
-                        <td>
-                            Nguyễn Văn Ba
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Sự cố ngập úng 1</td>
-                        <td>SC014</td>
-                        <td>Ngập úng</td>
-                        <td>0%</td>
-                        <td>
-                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
-                        </td>
-                        <td>
-                            Trần Văn Đức
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Sự cố ngập úng 2</td>
-                        <td>SC015</td>
-                        <td>Ngập úng</td>
-                        <td>100%</td>
-                        <td>
-                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
-                        </td>
-                        <td>
-                            Nguyễn Văn Nam
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>sự cố héo úa</td>
-                        <td>SC016</td>
-                        <td>Héo úa</td>
-                        <td>100%</td>
-                        <td>
-                            <a className="text-primary" href="/problem-report">Link báo cáo</a>
-                        </td>
-                        <td>
-                            Hoàng Văn Hoàng
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div>
+            <h2>Theo dõi kết quả xử lý sự cố</h2>
+            <Table columns={columns} dataSource={data} onChange={onChange} />
         </div>
     )
 }
 
-function SelectPerson() {
-    return (
-        <select class="custom-select">
-            <option selected>Chọn người xử lý</option>
-            <option value="1">NXLSC001</option>
-            <option value="2">NXLSC002</option>
-            <option value="3">NXLSC003</option>
-            <option value="4">NXLSC004</option>
-            <option value="5">NXLSC005</option>
-        </select>
-    )
+const columns = [
+    {
+        title: 'Stt',
+        dataIndex: 'order',
+        sorter: {
+            compare: (a, b) => a.order - b.order,
+        },
+    },
+    {
+        title: 'Loại sự cố',
+        dataIndex: 'problemType',
+        sorter: {
+            compare: (a, b) => a.problemType - b.problemType,
+        },
+    },
+    {
+        title: 'Người điều phối',
+        dataIndex: 'orderPerson',
+        sorter: {
+            compare: (a, b) => a.orderPerson - b.orderPerson,
+        },
+    },
+    {
+        title: 'Người xử lý',
+        dataIndex: 'processPerson',
+        sorter: {
+            compare: (a, b) => a.processPerson - b.processPerson,
+        },
+    },
+    {
+        title: 'Hạn công việc',
+        dataIndex: 'deadline',
+        sorter: {
+            compare: (a, b) => a.deadline - b.deadline,
+        },
+    },
+    {
+        title: 'Trạng thái xử lý',
+        dataIndex: 'processStatus',
+        sorter: {
+            compare: (a, b) => a.processStatus - b.processStatus,
+        },
+        render: processStatus => <Tag color={processStatus == "Hoàn thành"?"green":"volcano"}>{processStatus}</Tag>,
+    },
+    {
+        title: 'Báo cáo',
+        dataIndex: 'reportUrl',
+        render: reportUrl => <a href={reportUrl}>Báo cáo</a>,
+    },
+];
+
+const data = [
+    {
+        order: '1',
+        problemType: 'Sâu bệnh',
+        orderPerson: 'Nguyễn Văn Anh',
+        processPerson: 'Nguyễn Văn Nam',
+        deadline: '23/11/2020 - 25/11/2020',
+        processStatus: 'Hoàn thành',
+        reportUrl: "/problem-report",
+    },
+    {
+        order: '2',
+        problemType: 'Sâu bệnh',
+        orderPerson: 'Nguyễn Văn Anh',
+        processPerson: 'Nguyễn Văn Nam',
+        deadline: '23/11/2020 - 25/11/2020',
+        processStatus: 'Hoàn thành',
+        reportUrl: "/problem-report",
+    },
+    {
+        order: '3',
+        problemType: 'Ngập úng',
+        orderPerson: 'Nguyễn Văn Anh',
+        processPerson: 'Nguyễn Văn Nam',
+        deadline: '23/11/2020 - 25/11/2020',
+        processStatus: 'Hoàn thành',
+        reportUrl: "/problem-report",
+    },
+    {
+        order: '4',
+        problemType: 'Chặt phá',
+        orderPerson: 'Nguyễn Văn Anh',
+        processPerson: 'Nguyễn Văn Nam',
+        deadline: '23/11/2020 - 25/11/2020',
+        processStatus: 'Hoàn thành',
+        reportUrl: "/problem-report",
+    },
+    {
+        order: '5',
+        problemType: 'Gãy đổ',
+        orderPerson: 'Nguyễn Văn Anh',
+        processPerson: 'Nguyễn Văn Nam',
+        deadline: '23/11/2020 - 25/11/2020',
+        processStatus: 'Chưa hoàn thành',
+        reportUrl: "/problem-report",
+    },
+];
+function onChange(pagination, filters, sorter, extra) {
+    console.log('params', pagination, filters, sorter, extra);
 }
