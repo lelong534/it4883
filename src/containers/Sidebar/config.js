@@ -133,7 +133,7 @@ export const sidebarMenu = [
         key: 'MonitorCropStatus',
         heading: 'Giám sát cây trồng',
         icon: 'fas fa-tree-alt',
-        route: '/area-choose',
+        route: '/monitor-crop-status',
       },
       {
         key: 'CaregiverCoordinate',

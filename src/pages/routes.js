@@ -6,6 +6,7 @@ import VideoSurveillance from './GroupFunction1/VideoSurveillance';
 import ProblemReport from './GroupFunction1/ProblemReport';
 import CaregiverCoordinate from './GroupFunction1/CaregiverCoordinate';
 import ResultTracking from './GroupFunction1/ResultTracking';
+import MonitorCropStatusNew from './GroupFunction1/MonitorCropStatusNew';
 import AreaChoose from './GroupFunction1/MonitorCropStatus/AreaChoose';
 import Monitor from './GroupFunction1/MonitorCropStatus/Monitor';
 import AutoProblem from './AutoProblem';
@@ -132,6 +133,10 @@ export const routes = [
   {
     path: '/problem-report',
     component: ProblemReport,
+  },
+  {
+    path: '/monitor-crop-status',
+    component: MonitorCropStatusNew,
   },
 ];
 

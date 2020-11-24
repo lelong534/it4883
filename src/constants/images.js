@@ -14,6 +14,7 @@ const IMAGES = {
   resultMonitor: `${PUBLIC_URL}/images/resultmonitor.png`,
   weakTree: `${PUBLIC_URL}/images/weaktree.jpg`,
   goodTree: `${PUBLIC_URL}/images/goodtree.jpg`,
+  fallTree: `${PUBLIC_URL}/images/falltree.jpg`,
 };
 
 export default IMAGES;
