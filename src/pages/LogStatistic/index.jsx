@@ -7,143 +7,128 @@ const data = [
   {
     key: '1',
     id:'1',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+  type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
-status:'Đang hoạt động'
+status:'Đã báo cáo'
   },
   {
     key: '2',
     id:'2',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
-  status:'Đang hoạt động'
+  status:'Đang làm báo cáo'
   },
   {
     key: '3',
     id:'3',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+
   },
   {
     key: '4',
     id:'4',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+
   },
   {
     key: '5',
     id:'5',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
   
   },
   {
     key: '6',
     id:'6',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
   {
     key: '7',
     id:'7',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
   {
     key: '8',
     id:'8',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
 
   },
   {
     key: '9',
     id:'9',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
   {
     key: '10',
     id:'10',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
   {
     key: '11',
     id:'11',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
   
   },
   {
     key: '12',
     id:'12',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'Báo cáo vùng A',
+    type:'link1',
+  description:'Báo cáo quá trình xử lý cây trồng sâu bệnh',
   time:'21:00 11/19/2020',
   
   },
-  {
-    key: '13',
-    id:'13',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020'
-  },
-  {
-    key: '14',
-    id:'14',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020'
-  },
+  
 ];
 class Report extends React.Component {
     render() {
       const data = [
-        { month: '1', status: 3 },
-        { month: '2', status: 4 },
-        { month: '3', status: 3.5 },
-        { month: '4', status: 5 },
-        { month: '5', status: 4.9 },
-        { month: '6', status: 6 },
-        { month: '7', status: 7 },
-        { month: '8', status: 9 },
-        { month: '9', status: 13 },
-        { month: '10', status: 14 },
-        { month: '11', status: 15},
-        { month: '12', status: 16 },
+        { month: '1', status:'Sâu bệnh' },
+        { month: '2', status:'Ngập úng' },
+        { month: '3', status:'Hạn hán' },
+        { month: '4', status:'Gãy đổ' },
+        { month: '5', status:'Phát triển tốt' },
+        { month: '6', status:'Phát triển tốt'},
+        { month: '7', status:'Phát triển tốt' },
+        { month: '8', status:'Phát triển tốt' },
+        { month: '9', status:'Phát triển tốt' },
+        { month: '10', status:'Phát triển tốt' },
+        { month: '11', status:'Phát triển tốt'},
+        { month: '12', status:'Phát triển tốt' },
       ];
       const config = {
         data,
@@ -246,7 +231,7 @@ class TablePayloadActivity extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Type',
+        title: 'Link báo cáo',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
@@ -360,7 +345,7 @@ class TablePayload extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Type',
+        title: 'Link báo cáo',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),

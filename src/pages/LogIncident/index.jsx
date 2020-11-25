@@ -7,7 +7,7 @@ const data = [
     key: '1',
     id:'1',
     name: 'Sâu bệnh',
-  type:'Delete',
+  type:'Jame',
   description:'Delete Description',
   time:'21:00 11/19/2020',
 status:'Đã xử lý'
@@ -16,7 +16,7 @@ status:'Đã xử lý'
     key: '2',
     id:'2',
     name: 'Ngập úng',
-  type:'Delete',
+  type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
   status:'Đang xử lý'
@@ -25,7 +25,7 @@ status:'Đã xử lý'
     key: '3',
     id:'3',
     name: 'Hạn hán',
-  type:'Delete',
+  type:'Peter',
   description:'Delete Description',
   time:'21:00 11/19/2020',
  status:'Chưa xử lý'
@@ -34,7 +34,7 @@ status:'Đã xử lý'
     key: '4',
     id:'4',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
  status:'Ngừng hoạt động'
@@ -43,7 +43,7 @@ status:'Đã xử lý'
     key: '5',
     id:'5',
     name: 'Héo úa',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
   
@@ -52,7 +52,7 @@ status:'Đã xử lý'
     key: '6',
     id:'6',
     name: 'Gãy đổ',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
  
@@ -61,7 +61,7 @@ status:'Đã xử lý'
     key: '7',
     id:'7',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
  
@@ -70,7 +70,7 @@ status:'Đã xử lý'
     key: '8',
     id:'8',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
 
@@ -79,7 +79,7 @@ status:'Đã xử lý'
     key: '9',
     id:'9',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
  
@@ -88,7 +88,7 @@ status:'Đã xử lý'
     key: '10',
     id:'10',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
  
@@ -97,7 +97,7 @@ status:'Đã xử lý'
     key: '11',
     id:'11',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
   
@@ -106,7 +106,7 @@ status:'Đã xử lý'
     key: '12',
     id:'12',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020',
   
@@ -115,7 +115,7 @@ status:'Đã xử lý'
     key: '13',
     id:'13',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020'
   },
@@ -123,7 +123,7 @@ status:'Đã xử lý'
     key: '14',
     id:'14',
     name: 'Sâu bệnh',
-  type:'Delete',
+    type:'Anna',
   description:'Delete Description',
   time:'21:00 11/19/2020'
   },
@@ -217,13 +217,13 @@ class TablePayloadActivity extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Type',
+        title: 'Nhân viên xử lý sự cố',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
       },
       {
-        title: 'Miêu tả',
+        title: 'Miêu tả quá trình xử lý sự cố',
         key: 'description',
         dataIndex: 'description',
         ...this.getColumnSearchProps('description'),
@@ -331,13 +331,13 @@ class TablePayload extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Type',
+        title: 'Nhân viên xử lý sự cố',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
       },
       {
-        title: 'Miêu tả',
+        title: 'Miêu tả quá trình xử lý sự cố',
         key: 'description',
         dataIndex: 'description',
         ...this.getColumnSearchProps('description'),
