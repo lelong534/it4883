@@ -8,9 +8,9 @@ const data = [
     id:'1',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
-status:'Đang hoạt động',
+status:'Đang xử lý',
 pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drones-0627_0.jpg'
   },
   {
@@ -18,9 +18,9 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'2',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
-  status:'Đang hoạt động',
+  status:'Đã xử lý',
   pic:'https://store.hp.com/app/assets/images/uploads/prod/how-to-operate-drone-camera-hero1563465531828438.jpg'
   },
   {
@@ -28,25 +28,25 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'3',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+ status:'Đang xử lý'
   },
   {
     key: '4',
     id:'4',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+ status:'Đã xử lý'
   },
   {
     key: '5',
     id:'5',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
   
   },
@@ -55,7 +55,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'6',
  
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
@@ -64,7 +64,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'7',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
@@ -73,7 +73,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'8',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
 
   },
@@ -82,7 +82,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'9',
    
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
@@ -91,7 +91,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'10',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
  
   },
@@ -100,7 +100,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'11',
 
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
   
   },
@@ -109,7 +109,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'12',
   
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
   
   },
@@ -118,7 +118,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'13',
  
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020'
   },
   {
@@ -126,7 +126,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
     id:'14',
     
   type:'Delete',
-  description:'Delete Description',
+  description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020'
   },
 ];
@@ -221,17 +221,12 @@ class TablePayloadActivity extends React.Component {
           <>
            <Image
       width={200}
-      src="https://store.hp.com/app/assets/images/uploads/prod/how-to-operate-drone-camera-hero1563465531828438.jpg"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvQmt0sBq80EDaYAzxktTKD2K6NmN4UwS5VA&usqp=CAU"
     />
           </>
         ),
       },
-      {
-        title: 'Type',
-        dataIndex: 'type',
-        key: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
+     
       {
         title: 'Miêu tả',
         key: 'description',
@@ -344,17 +339,12 @@ class TablePayload extends React.Component {
           <>
            <Image
       width={200}
-      src="https://store.hp.com/app/assets/images/uploads/prod/how-to-operate-drone-camera-hero1563465531828438.jpg"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvQmt0sBq80EDaYAzxktTKD2K6NmN4UwS5VA&usqp=CAU"
     />
           </>
         ),
       },
-      {
-        title: 'Type',
-        dataIndex: 'type',
-        key: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
+      
       {
         title: 'Miêu tả',
         key: 'description',

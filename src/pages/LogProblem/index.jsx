@@ -6,45 +6,45 @@ const data = [
   {
     key: '1',
     id:'1',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
-  description:'Delete Description',
+  description:'Cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
-status:'Đang hoạt động'
+status:'Đang xử lý'
   },
   {
     key: '2',
     id:'2',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
-  description:'Delete Description',
+  description:'Cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
-  status:'Đang hoạt động'
+  status:'Đang xử lý'
   },
   {
     key: '3',
     id:'3',
-    name: 'Payload1',
+    name: 'Ngập úng',
   type:'Delete',
-  description:'Delete Description',
+  description:'Mưa lớn, nước ngập úng',
   time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+ status:'Đã xử lý'
   },
   {
     key: '4',
     id:'4',
-    name: 'Payload1',
+    name: 'Ngập úng',
   type:'Delete',
-  description:'Delete Description',
+  description:'Ngập úng',
   time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+ status:'Chưa xử lý'
   },
   {
     key: '5',
     id:'5',
-    name: 'Payload1',
+    name: 'Gãy đổ',
   type:'Delete',
-  description:'Delete Description',
+  description:'Bão, gãy đổ cây trồng',
   time:'21:00 11/19/2020',
   
   },
@@ -53,7 +53,7 @@ status:'Đang hoạt động'
     id:'6',
     name: 'Sâu bênh',
   type:'Delete',
-  description:'Delete Description',
+  description:'Sâu cuốn lá',
   time:'21:00 11/19/2020',
  
   },
