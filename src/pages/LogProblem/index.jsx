@@ -51,7 +51,7 @@ status:'Đang hoạt động'
   {
     key: '6',
     id:'6',
-    name: 'Payload1',
+    name: 'Sâu bênh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -60,7 +60,7 @@ status:'Đang hoạt động'
   {
     key: '7',
     id:'7',
-    name: 'Payload1',
+    name: 'Sâu bênh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -69,7 +69,7 @@ status:'Đang hoạt động'
   {
     key: '8',
     id:'8',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -78,7 +78,7 @@ status:'Đang hoạt động'
   {
     key: '9',
     id:'9',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -87,7 +87,7 @@ status:'Đang hoạt động'
   {
     key: '10',
     id:'10',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -96,7 +96,7 @@ status:'Đang hoạt động'
   {
     key: '11',
     id:'11',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -105,7 +105,7 @@ status:'Đang hoạt động'
   {
     key: '12',
     id:'12',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020',
@@ -114,7 +114,7 @@ status:'Đang hoạt động'
   {
     key: '13',
     id:'13',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020'
@@ -122,7 +122,7 @@ status:'Đang hoạt động'
   {
     key: '14',
     id:'14',
-    name: 'Payload1',
+    name: 'Sâu bệnh',
   type:'Delete',
   description:'Delete Description',
   time:'21:00 11/19/2020'
@@ -325,7 +325,7 @@ class TablePayload extends React.Component {
         ...this.getColumnSearchProps('id'),
       },
       {
-        title: 'Tên',
+        title: 'Sự cố',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
@@ -337,7 +337,7 @@ class TablePayload extends React.Component {
         ...this.getColumnSearchProps('type'),
       },
       {
-        title: 'Miêu tả',
+        title: 'Miêu tả sự cố',
         key: 'description',
         dataIndex: 'description',
         ...this.getColumnSearchProps('description'),
