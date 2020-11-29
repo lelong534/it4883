@@ -1,4 +1,4 @@
-import { Table, Input, Button, Space,BackTop,Col,Card} from 'antd';
+import { Table, Input, Button, Space,BackTop,Col,Card,DatePicker,Form} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import { Line } from '@ant-design/charts';
@@ -114,6 +114,7 @@ status:'Đã báo cáo'
   },
   
 ];
+const { RangePicker } = DatePicker;
 class Report extends React.Component {
     render() {
       const data = [
@@ -403,10 +404,16 @@ class App extends React.Component{
           }
         >
  <h1>
-          Lịch sử báo cáo, thống kê
+          Chọn thời gian bạn muốn kiểm tra lịch sử báo cáo thống kê
         </h1>
-        
-        
+        <br/>
+        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+       <Space direction="vertical" size={12}>
+    <RangePicker />
+    
+  </Space >
+  </Form>
+  
   <br/>
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">

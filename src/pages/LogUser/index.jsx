@@ -1,8 +1,8 @@
 import React from 'react';
-import { Table,Space,Button,BackTop,Input,Col,Card} from 'antd';
+import { Table,Space,Button,BackTop,Input,Col,Card,DatePicker,Form} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
-
+const { RangePicker } = DatePicker;
 const data = [
   {
     key: '1',
@@ -438,8 +438,17 @@ class App extends React.Component{
             />
           }
         >
-            <h1>Xem lịch sử hoạt động của User</h1>
+           <h1>
+          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+        </h1>
         <br/>
+        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+       <Space direction="vertical" size={12}>
+    <RangePicker />
+    
+  </Space >
+  </Form>
+<br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">
           Log
         </Button>

@@ -6,126 +6,136 @@ const data = [
   {
     key: '1',
     id:'1',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'UAV1',
+  type:'Thêm UAV',
+  description:'Thêm kết nối UAV',
   time:'21:00 11/19/2020',
-status:'Đang hoạt động'
+status:'Đang kết nối'
   },
   {
     key: '2',
     id:'2',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
+    name: 'UAV2',
+  type:'Thêm UAV',
+  description:'Thêm kết nối UAV',
   time:'21:00 11/19/2020',
-  status:'Đang hoạt động'
+status:'Đã kết nối'
   },
   {
     key: '3',
     id:'3',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+    name: 'UAV3',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Chưa kết nối'
   },
   {
     key: '4',
     id:'4',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
- status:'Ngừng hoạt động'
+    name: 'UAV1',
+    type:'Xóa UAV',
+    description:'Xóa kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Không tồn tại'
   },
   {
     key: '5',
     id:'5',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
   
   },
   {
     key: '6',
     id:'6',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
  
   },
   {
     key: '7',
     id:'7',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
  
   },
   {
     key: '8',
     id:'8',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
 
   },
   {
     key: '9',
     id:'9',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
  
   },
   {
     key: '10',
     id:'10',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
  
   },
   {
     key: '11',
     id:'11',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
   
   },
   {
     key: '12',
     id:'12',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020',
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
   
   },
   {
     key: '13',
     id:'13',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020'
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
   },
   {
     key: '14',
     id:'14',
-    name: 'Payload1',
-  type:'Delete',
-  description:'Delete Description',
-  time:'21:00 11/19/2020'
+    name: 'UAV1',
+    type:'Thêm UAV',
+    description:'Thêm kết nối UAV',
+    time:'21:00 11/19/2020',
+  status:'Đang kết nối'
   },
 ];
 const { RangePicker } = DatePicker;
@@ -393,11 +403,17 @@ class App extends React.Component{
           }
         >
  <h1>
-          Lịch sử kết nối UAV
+          Chọn thời gian bạn muốn kiểm tra lịch sử kết nối UAV
         </h1>
-        
-       
-  <br/>
+        <br/>
+        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+       <Space direction="vertical" size={12}>
+    <RangePicker />
+    
+  </Space >
+  </Form>
+  
+ 
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">
           Log

@@ -1,4 +1,4 @@
-import { Table, Input, Button, Space,BackTop,Col,Card,Image} from 'antd';
+import { Table, Input, Button, Space,BackTop,Col,Card,Image,Form,DatePicker} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
@@ -11,12 +11,13 @@ const data = [
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
 status:'Đang xử lý',
+region:'Vùng A',
 pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drones-0627_0.jpg'
   },
   {
     key: '2',
     id:'2',
-
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -26,7 +27,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   {
     key: '3',
     id:'3',
-
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -35,7 +36,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   {
     key: '4',
     id:'4',
-
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -44,7 +45,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   {
     key: '5',
     id:'5',
-
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -53,7 +54,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   {
     key: '6',
     id:'6',
- 
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -62,7 +63,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   {
     key: '7',
     id:'7',
-
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -71,7 +72,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   {
     key: '8',
     id:'8',
-
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -80,7 +81,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   {
     key: '9',
     id:'9',
-   
+    region:'Vùng A',
   type:'Delete',
   description:'Hình ảnh cây trồng bị sâu bệnh',
   time:'21:00 11/19/2020',
@@ -130,7 +131,7 @@ pic:'https://h7f7z2r7.stackpathcdn.com/sites/default/files/images/articles/drone
   time:'21:00 11/19/2020'
   },
 ];
-
+const { RangePicker } = DatePicker;
 
 class TablePayloadActivity extends React.Component {
   
@@ -226,7 +227,12 @@ class TablePayloadActivity extends React.Component {
           </>
         ),
       },
-     
+      {
+        title: 'Vùng ảnh hưởng',
+        key: 'region',
+        dataIndex: 'region',
+        ...this.getColumnSearchProps('region'),
+      },
       {
         title: 'Miêu tả',
         key: 'description',
@@ -344,7 +350,12 @@ class TablePayload extends React.Component {
           </>
         ),
       },
-      
+      {
+        title: 'Vùng ảnh hưởng',
+        key: 'region',
+        dataIndex: 'region',
+        ...this.getColumnSearchProps('region'),
+      },
       {
         title: 'Miêu tả',
         key: 'description',
@@ -392,14 +403,27 @@ class App extends React.Component{
       <>
        <Col  style={{marginRight:'4%',marginTop:20}}>
             <Card
-            hoverable
+          hoverable
           style={{ width: '100',marginLeft:40 }}
-          
+          cover={
+            <img
+            style={{height:400}}
+              alt="example"
+              src="https://store.hp.com/app/assets/images/uploads/prod/how-to-operate-drone-camera-hero1563465531828438.jpg"
+            />
+          }
         >
- <h1>
-         Lịch sử lưu trữ hình ảnh/video
+        <h1>
+          Chọn thời gian bạn muốn kiểm tra lịch sử lưu trữ Hình ảnh / Video
         </h1>
-      
+        <br/>
+        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+       <Space direction="vertical" size={12}>
+    <RangePicker />
+    
+  </Space >
+  </Form>
+  <br/>
   <br/>
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">

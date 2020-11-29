@@ -1,4 +1,4 @@
-import { Table, Input, Button, Space,BackTop,Col,Card} from 'antd';
+import { Table, Input, Button, Space,BackTop,Col,Card,DatePicker,Form} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
 import React from 'react';
@@ -8,7 +8,7 @@ const data = [
     id:'1',
     name: 'Sâu bệnh',
   type:'Jame',
-  description:'Delete Description',
+  description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
 status:'Đã xử lý'
   },
@@ -17,7 +17,7 @@ status:'Đã xử lý'
     id:'2',
     name: 'Ngập úng',
   type:'Anna',
-  description:'Delete Description',
+  description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
   status:'Đang xử lý'
   },
@@ -26,7 +26,7 @@ status:'Đã xử lý'
     id:'3',
     name: 'Hạn hán',
   type:'Peter',
-  description:'Delete Description',
+  description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
  status:'Chưa xử lý'
   },
@@ -35,7 +35,7 @@ status:'Đã xử lý'
     id:'4',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
  status:'Ngừng hoạt động'
   },
@@ -44,7 +44,7 @@ status:'Đã xử lý'
     id:'5',
     name: 'Héo úa',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
   
   },
@@ -53,7 +53,7 @@ status:'Đã xử lý'
     id:'6',
     name: 'Gãy đổ',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
  
   },
@@ -62,7 +62,7 @@ status:'Đã xử lý'
     id:'7',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
  
   },
@@ -71,7 +71,7 @@ status:'Đã xử lý'
     id:'8',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
 
   },
@@ -80,7 +80,7 @@ status:'Đã xử lý'
     id:'9',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
  
   },
@@ -89,7 +89,7 @@ status:'Đã xử lý'
     id:'10',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
  
   },
@@ -98,7 +98,7 @@ status:'Đã xử lý'
     id:'11',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
   
   },
@@ -107,7 +107,7 @@ status:'Đã xử lý'
     id:'12',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020',
   
   },
@@ -116,7 +116,7 @@ status:'Đã xử lý'
     id:'13',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020'
   },
   {
@@ -124,11 +124,11 @@ status:'Đã xử lý'
     id:'14',
     name: 'Sâu bệnh',
     type:'Anna',
-  description:'Delete Description',
+    description:'Đã phun thuốc trừ sâu',
   time:'21:00 11/19/2020'
   },
 ];
-
+const { RangePicker } = DatePicker;
 
 class TablePayloadActivity extends React.Component {
   
@@ -392,12 +392,18 @@ class App extends React.Component{
             />
           }
         >
- <h1>
-         Lịch sử xử lý sự cố
+
+        <h1>
+          Chọn thời gian bạn muốn kiểm tra lịch sử xử lý sự cố
         </h1>
-        
         <br/>
-        
+        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+       <Space direction="vertical" size={12}>
+    <RangePicker />
+    
+  </Space >
+  </Form>
+  
   <br/>
   <br/>
         <Button type="primary" onClick={this.showModal1} htmlType="submit">
