@@ -137,10 +137,16 @@ export const sidebarMenu = [
         route: '/log-payload',
       },
       {
-        key: 'LogMetaData',
-        heading: 'Lịch sử lưu trữ hình ảnh/video',
+        key: 'LogImage',
+        heading: 'Lịch sử lưu trữ hình ảnh',
         icon: 'fas fa-images',
-        route: '/log-metadata',
+        route: '/log-image',
+      },
+      {
+        key: 'LogVideo',
+        heading: 'Lịch sử lưu trữ video',
+        icon: 'fas fa-images',
+        route: '/log-video',
       },
       {
         key: 'LogIncident',

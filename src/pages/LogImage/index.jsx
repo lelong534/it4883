@@ -5,7 +5,7 @@ import React from 'react';
 var axios = require('axios');
 const { RangePicker } = DatePicker;
 
-class PayloadActivity extends React.Component {
+class ImageActivity extends React.Component {
   
   state = {
     searchText: '',
@@ -109,7 +109,7 @@ class PayloadActivity extends React.Component {
         sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
       },
       {
-        title: 'Tên',
+        title: 'Hình ảnh',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
@@ -147,7 +147,7 @@ class PayloadActivity extends React.Component {
     )
   }
 }
-class Payload extends React.Component {
+class Image extends React.Component {
   
   state = {
     searchText: '',
@@ -252,7 +252,7 @@ class Payload extends React.Component {
         sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
       },
       {
-        title: 'Payload',
+        title: 'Hình ảnh',
         dataIndex: 'name',
         key: 'name',
         ...this.getColumnSearchProps('name'),
@@ -310,9 +310,9 @@ class App extends React.Component{
   setLogData(fromDate, toDate) {
     let url = null;
     if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/payload?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/image?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
     } else {
-      url = 'https://it4883logging.herokuapp.com/api/payload?username=G3&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/image?username=G3&password=123';
     }
      
     let config = {
@@ -324,20 +324,20 @@ class App extends React.Component{
     axios(config)
       .then((response) => {
         console.log(response.data);
-        let padloadData = response.data.map((payload, index) => ({
+        let imageData = response.data.map((image, index) => ({
           key: index,
-          name: payload.name,
-          entityId:payload.entityId,
-          timestamp: payload.timestamp,
-          type: payload.type,
-          description: payload.description,
+          name: image.name,
+          entityId:image.entityId,
+          timestamp: image.timestamp,
+          type: image.type,
+          description: image.description,
         }));
-        padloadData.forEach((padloadData) => {
-          for(let key in padloadData) {
-            if (padloadData[key] == null) padloadData[key] ='';
+        imageData.forEach((imageData) => {
+          for(let key in imageData) {
+            if (imageData[key] == null) imageData[key] ='';
           }
         });
-        this.setState({ logData: padloadData, isLoadedLogData: true });
+        this.setState({ logData: imageData, isLoadedLogData: true });
         
       })
       .catch(function (error) {
@@ -348,9 +348,9 @@ class App extends React.Component{
   setLogActivityData(fromDate, toDate) {
     let url = null;
     if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/activity/payload?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/activity/image-log?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
     } else {
-      url = 'https://it4883logging.herokuapp.com/api/activity/payload?username=G3&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/activity/image-log?username=G3&password=123';
     }
      
     let config = {
@@ -360,22 +360,22 @@ class App extends React.Component{
     };
     axios(config)
       .then((response) => {
-        let payloadActivityData = response.data.map((payload, index) => ({
+        let imageActivityData = response.data.map((image, index) => ({
           key: index,
-          entityId:payload.entityId,
-          name:payload,
-          type:payload.type,
-          description:payload.description,
-          timestamp:payload.timestamp,
-         state:payload.state
+          entityId:image.entityId,
+          name:image,
+          type:image.type,
+          description:image.description,
+          timestamp:image.timestamp,
+         state:image.state
           
         }));
-        payloadActivityData.forEach((padloadData) => {
-          for(let key in padloadData) {
-            if (padloadData[key] == null) padloadData[key] ='';
+        imageActivityData.forEach((imageData) => {
+          for(let key in imageData) {
+            if (imageData[key] == null) imageData[key] ='';
           }
         });
-        this.setState({ logActivityData: payloadActivityData, isLoadedLogActivityData: true });
+        this.setState({ logActivityData: imageActivityData, isLoadedLogActivityData: true });
       })
       .catch(function (error) {
         console.log(error);
@@ -417,7 +417,7 @@ class App extends React.Component{
           }
         >
 <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động của payload
+          Chọn thời gian bạn muốn kiểm tra lịch sử lưu trữ hình ảnh
         </h1>
         <br/>
         <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
@@ -435,10 +435,10 @@ class App extends React.Component{
             <br />
             
             <div style={{ display: this.state.tableShow === 'log' ? "block" : "none" }}>
-              <Payload data={this.state.logData} loading={!this.state.isLoadedLogData}/>
+              <Image data={this.state.logData} loading={!this.state.isLoadedLogData}/>
             </div>
             <div style={{ display: this.state.tableShow === 'logActivity' ? "block" : "none" }}>
-              <PayloadActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
+              <ImageActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
             </div>
             
       </Card>
@@ -448,7 +448,7 @@ class App extends React.Component{
     );
   }
 }
-function LogPayload(){
+function LogImage(){
   return(
     <>
 <App />
@@ -456,4 +456,4 @@ function LogPayload(){
 </>
   );
   }
-  export default LogPayload;
+  export default LogImage;

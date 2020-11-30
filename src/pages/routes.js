@@ -8,8 +8,9 @@ import LogProblem from './LogProblem';
 import Check from './Check';
 import Report from './Report';
 import MetaData from './MetaData';
+import LogVideo from './LogVideo';
 import LogPayLoad from './LogPayLoad';
-import LogMetaData from './LogMetaData';
+import LogImage from './LogImage';
 import LogIncident from './LogIncident';
 import LogObjMonitor from './LogObjMonitor';
 import LogRegion from './LogRegion';
@@ -94,8 +95,12 @@ export const routes = [
     component: LogPayLoad,
   },
   {
-    path: '/log-metadata',
-    component: LogMetaData,
+    path: '/log-image',
+    component: LogImage,
+  },
+  {
+    path: '/log-video',
+    component: LogVideo,
   },
   {
     path: '/log-incident',
