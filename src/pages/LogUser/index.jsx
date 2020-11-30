@@ -52,6 +52,13 @@ class User extends React.Component {
         sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
       },
       {
+        title: 'Id',
+        dataIndex: 'id',
+        key: 'id',
+        sorter: (a, b) => a.id > b.id ? 1 : -1,
+        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+      },
+      {
         title: 'Vai trò',
         dataIndex: 'role',
         key: 'role',
@@ -328,6 +335,7 @@ class App extends React.Component {
           time: user.timestamp,
           address: 'London No. 2 Lake Park',
           type: user.type,
+          id: user.entityId,
         }));
         userData.forEach((userData) => {
           for(let key in userData) {
@@ -438,8 +446,6 @@ class App extends React.Component {
             <div style={{ display: this.state.tableShow == 'logActivity' ? "block" : "none" }}>
               <UserActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
             </div>
-            
-            
 
           </Card>
         </Col>

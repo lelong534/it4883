@@ -1,423 +1,396 @@
-import { Table, Input, Button, Space,BackTop,DatePicker,Form,Col,Card} from 'antd';
+import React from 'react';
+import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Radio } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
-import React from 'react';
-const data = [
-  {
-    key: '1',
-    id:'1',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '2',
-    id:'2',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '3',
-    id:'3',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '4',
-    id:'4',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '5',
-    id:'5',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '6',
-    id:'6',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '7',
-    id:'7',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '8',
-    id:'8',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '9',
-    id:'9',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '10',
-    id:'10',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '11',
-    id:'11',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-  {
-    key: '12',
-    id:'12',
-    name: 'Sâu bệnh',
-  type:'Mức 1',
-  description:'Phun thuốc trừ sâu',
-  time:'21:00 11/19/2020',
-status:'Đang xử lý'
-  },
-];
+var axios = require('axios');
 const { RangePicker } = DatePicker;
 
-class TablePayloadActivity extends React.Component {
-  
+class User extends React.Component {
   state = {
-    searchText: '',
-    searchedColumn: '',
+    filteredInfo: null,
+    sortedInfo: null,
   };
 
-  getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: text =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
     this.setState({
-      searchText: selectedKeys[0],
-      searchedColumn: dataIndex,
+      filteredInfo: filters,
+      sortedInfo: sorter,
     });
   };
 
-  handleReset = clearFilters => {
-    clearFilters();
-    this.setState({ searchText: '' });
+  clearFilters = () => {
+    this.setState({ filteredInfo: null });
   };
 
-  render() {
-    const columns = [
-      {
-        title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
-        ...this.getColumnSearchProps('id'),
-      },
-      {
-        title: 'Cảnh báo',
-        dataIndex: 'name',
-        key: 'name',
-        ...this.getColumnSearchProps('name'),
-      },
-      {
-        title: 'Mức độ cảnh báo',
-        dataIndex: 'type',
-        key: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
-      {
-        title: 'Giải pháp xử lý',
-        key: 'description',
-        dataIndex: 'description',
-        ...this.getColumnSearchProps('description'),
-      },
-      {
-        title: 'Thời gian',
-        key: 'time',
-        dataIndex: 'time',
-        ...this.getColumnSearchProps('time'),
-      },
-      {
-        title: 'Trạng thái',
-        key: 'status',
-        dataIndex: 'status',
-        ...this.getColumnSearchProps('status'),
-      }
-    ];
-    return <Table columns={columns} dataSource={data} />;
-  }
-}
-class TablePayload extends React.Component {
-  
-  state = {
-    searchText: '',
-    searchedColumn: '',
-  };
-
-  getColumnSearchProps = dataIndex => ({
-    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={node => {
-            this.searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-          style={{ width: 188, marginBottom: 8, display: 'block' }}
-        />
-        <Space>
-          <Button
-            type="primary"
-            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
-            icon={<SearchOutlined />}
-            size="small"
-            style={{ width: 90 }}
-          >
-            Search
-          </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
-            Reset
-          </Button>
-        </Space>
-      </div>
-    ),
-    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-        : '',
-    onFilterDropdownVisibleChange: visible => {
-      if (visible) {
-        setTimeout(() => this.searchInput.select(), 100);
-      }
-    },
-    render: text =>
-      this.state.searchedColumn === dataIndex ? (
-        <Highlighter
-          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
-          searchWords={[this.state.searchText]}
-          autoEscape
-          textToHighlight={text ? text.toString() : ''}
-        />
-      ) : (
-        text
-      ),
-  });
-
-  handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
+  clearAll = () => {
     this.setState({
-      searchText: selectedKeys[0],
-      searchedColumn: dataIndex,
+      filteredInfo: null,
+      sortedInfo: null,
     });
   };
 
-  handleReset = clearFilters => {
-    clearFilters();
-    this.setState({ searchText: '' });
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'time',
+      },
+    });
   };
 
   render() {
+    let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
     const columns = [
       {
-        title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
-        ...this.getColumnSearchProps('id'),
+        title: 'Id',
+        dataIndex: 'entityId',
+        key: 'entityId',
+        sorter: (a, b) => a.entityId > b.entityId,
       },
       {
-        title: 'Cảnh báo',
+        title: 'Tên cảnh báo',
         dataIndex: 'name',
         key: 'name',
-        ...this.getColumnSearchProps('name'),
+        sorter: (a, b) => a.name > b.name,
       },
       {
-        title: 'Mức độ cảnh báo',
+        title: 'Hành động',
         dataIndex: 'type',
         key: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
-      {
-        title: 'Giải pháp xử lý',
-        key: 'description',
-        dataIndex: 'description',
-        ...this.getColumnSearchProps('description'),
+        sorter: (a, b) => a.type.length - b.type.length,
+        sortDirections: ['descend', 'ascend'],
       },
       {
         title: 'Thời gian',
-        key: 'time',
-        dataIndex: 'time',
-        ...this.getColumnSearchProps('time'),
+        dataIndex: 'timestamp',
+        key: 'timestamp',
+        sorter: (a, b) => a.timestamp > b.timestamp,
+        sortDirections: ['descend', 'ascend'],
       },
-     
+      {
+        title: 'Mô tả',
+        dataIndex: 'descripiton',
+        key: 'description',
+        sorter: (a, b) => a.description > b.description,
+      },
     ];
-    return <Table columns={columns} dataSource={data} />;
-  }
-}
-class App extends React.Component{
-  constructor(props){
-    super(props);
-    this.state={visible1:false};
-    this.showModal1=this.showModal1.bind(this);
-    this.state={visible2:false};
-    this.showModal2=this.showModal2.bind(this)
-  }
-
- showModal1(){
-   this.setState(state=>(
-     {
-       visible1: !state.visible1
-     }
-   ));
- }
- 
- showModal2(){
-  this.setState(state=>(
-    {
-      visible2: !state.visible2
-    }
-  ));
-  };
-  render() {
     return (
       <>
-       <Col  style={{marginRight:'4%',marginTop:20}}>
-            <Card
-            hoverable
-          style={{ width: '100',marginLeft:40 }}
-          cover={
-            <img
-            style={{height:400}}
-              alt="example"
-              src="https://store.hp.com/app/assets/images/uploads/prod/how-to-operate-drone-camera-hero1563465531828438.jpg"
-            />
-          }
-        >
- <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử cảnh báo
-        </h1>
-        
-        <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-    <RangePicker />
-    
-  </Space >
-  </Form>
-  <br/>
-  <br/>
-        <Button type="primary" onClick={this.showModal1} htmlType="submit">
-          Log
-        </Button>
-        <div
-         style={{display:this.state.visible1?"block":"none"}}
-        >
-          <TablePayload />
-        </div>
-        <Button type="primary" onClick={this.showModal2} htmlType="submit" style={{marginLeft:20}}>
-          Log Activity
-        </Button>
-        <div
-          style={{display:this.state.visible2?"block":"none"}}
-        >
-          <TablePayloadActivity />
-        </div>
-      </Card>
-      </Col>
-      
+        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
       </>
     );
   }
 }
-function LogWarn(){
-  return(
-    <>
-<App />
-<BackTop/>
-</>
-  );
+
+class UserActivity extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      searchText: '',
+      searchedColumn: '',
+      filteredInfo: null,
+      sortedInfo: null,
+    };
   }
-  export default LogWarn;
+  
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select(), 100);
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+          text
+        ),
+  });
+
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    this.setState({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
+    });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
+
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  };
+
+  clearFilters = () => {
+    this.setState({ filteredInfo: null });
+  };
+
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null,
+    });
+  };
+
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'time',
+      },
+    });
+  };
+
+  render() {
+    let { sortedInfo, filteredInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+    filteredInfo = filteredInfo || {};
+
+    const columns = [
+      {
+        title: 'Id',
+        dataIndex: 'entityId',
+        key: 'entityId',
+        sorter: (a, b) => a.entityId > b.entityId,
+      },
+      {
+        title: 'Tên cảnh báo',
+        dataIndex: 'name',
+        key: 'name',
+        sorter: (a, b) => a.name > b.name,
+      },
+      {
+        title: 'Hành động',
+        dataIndex: 'type',
+        key: 'type',
+        sorter: (a, b) => a.type > b.type,
+      },
+      {
+        title: 'Thời gian',
+        dataIndex: 'timestamp',
+        key: 'timestamp',
+        sorter: (a, b) => a.timestamp > b.timestamp,
+      },
+      {
+        title: 'Mô tả',
+        dataIndex: 'descripiton',
+        key: 'description',
+        sorter: (a, b) => a.description > b.description,
+      },
+    ];
+
+    return (
+      <>
+        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
+      </>
+    );
+  }
+}
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tableShow: '',
+      fromDate: '',
+      toDate: '',
+      logData: null,
+      logActivityData: null,
+      isLoadedLogData: false,
+      isLoadedLogActivityData: false,
+    };
+    this.onTableShowChange = this.onTableShowChange.bind(this);
+    this.onRangePickerChange = this.onRangePickerChange.bind(this);
+    this.setLogData = this.setLogData.bind(this);
+    this.setLogActivityData = this.setLogActivityData.bind(this);
+  }
+
+  onTableShowChange(tableShow){
+    this.setState({tableShow: tableShow});
+  }
+
+  setLogData(fromDate, toDate) {
+    let url = null;
+    if (fromDate && toDate) {
+      url = 'https://it4883logging.herokuapp.com/api/warning?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G8&password=123';
+    } else {
+      url = 'https://it4883logging.herokuapp.com/api/warning?username=G8&password=123';
+    }
+     
+    let config = {
+      method: 'get',
+      url: url,
+      headers: {}
+    };
+
+    axios(config)
+      .then((response) => {
+        let userData = response.data.map((drone, index) => ({
+          key: index,
+          ...drone
+        }));
+        userData.forEach((userData) => {
+          for(let key in userData) {
+            console.log(userData[key])
+            if (userData[key] == null) userData[key] ='';
+          }
+        });
+        this.setState({ logData: userData, isLoadedLogData: true });
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  setLogActivityData(fromDate, toDate) {
+    let url = null;
+    if (fromDate && toDate) {
+      url = 'https://it4883logging.herokuapp.com/api/activity/warning?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G8&password=123';
+    } else {
+      url = 'https://it4883logging.herokuapp.com/api/activity/warning?username=G8&password=123';
+    }
+     
+    let config = {
+      method: 'get',
+      url: url,
+      headers: {}
+    };
+    axios(config)
+      .then((response) => {
+        let userActivityData = response.data.map((user, index) => ({
+          key: index,
+          ...user
+          
+        }));
+        userActivityData.forEach((userData) => {
+          for(let key in userData) {
+            if (userData[key] == null) userData[key] ='';
+          }
+        });
+        this.setState({ logActivityData: userActivityData, isLoadedLogActivityData: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  onRangePickerChange(dates, dateStrings) {
+    this.setState({isLoadedLogData: false, isLoadedLogActivityData:false});
+    let fromDate = "";
+    let toDate = "";
+
+    if (dates) {
+      fromDate = dates[0].format('YYYY-MM-DDThh:mm:ss');
+      toDate = dates[1].format('YYYY-MM-DDThh:mm:ss');
+    }
+
+    this.setLogData(fromDate, toDate);
+    this.setLogActivityData(fromDate, toDate);
+    
+  }
+
+  componentDidMount(){
+    this.setLogData(null, null);
+    this.setLogActivityData(null, null);
+  }
+  render() {
+    return (
+      <>
+        <Col style={{ marginRight: '4%', marginTop: 20 }}>
+          <Card
+            hoverable
+            style={{ width: '100', marginLeft: 40 }}
+            cover={
+              <img
+                style={{ height: 400 }}
+                alt="example"
+                src="https://i.pinimg.com/originals/11/9d/e3/119de34b79d90fc7ee2c175525726741.jpg"
+              />
+            }
+          >
+            <h1>
+              Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+            </h1>
+            <br />
+            <Form rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+              <Space direction="vertical" size={12}>
+                <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
+              </Space >
+            </Form>
+            <br />
+
+            <Radio.Group buttonStyle="solid" onChange={(e) => {this.onTableShowChange(e.target.value)}} style={{marginBottom:'20px'}}>
+              <Radio.Button value="log">Log</Radio.Button>
+              <Radio.Button value="logActivity">LogActivity</Radio.Button>
+            </Radio.Group>
+            <br />
+            
+            <div style={{ display: this.state.tableShow == 'log' ? "block" : "none" }}>
+              <User data={this.state.logData} loading={!this.state.isLoadedLogData}/>
+            </div>
+            <div style={{ display: this.state.tableShow == 'logActivity' ? "block" : "none" }}>
+              <UserActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
+            </div>
+          </Card>
+        </Col>
+      </>
+    );
+  }
+}
+function LogDrone() {
+  return (
+    <>
+      <App />
+      <BackTop />
+    </>
+  );
+}
+export default LogDrone;
