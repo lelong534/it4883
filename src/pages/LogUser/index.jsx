@@ -1,125 +1,9 @@
 import React from 'react';
-import { Table,Space,Button,BackTop,Input,Col,Card,DatePicker,Form} from 'antd';
+import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Radio } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+var axios = require('axios');
 const { RangePicker } = DatePicker;
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    time: '21:00 11/19/2020',
-    role:'Giám sát viên',
-    address: 'New York No. 1 Lake Park',
-    working:'Giám sát vùng A'
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    role:'Kỹ thuật viên',
-    time:'21:00 11/19/2020',
-    address: 'London No. 1 Lake Park',
-    working:'Xử lý sự cố '
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'Sidney No. 1 Lake Park',
-    working:'Phân công nhân viên xử lý sự cố'
-  },
-  {
-    key: '4',
-    name: 'Jim Red',
-    role:'Nhân viên chăm sóc cây',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '5',
-    name: 'Jim Red',
-    role:'Nhân viên chăm sóc cây',
-    time:'21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '6',
-    name: 'Jim Red',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '7',
-    name: 'Jim Red',
-    role:'Nhân viên quản lý',
-    time:'21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '8',
-    name: 'Jim Red',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '9',
-    name: 'Jim Blue',
-    role:'Nhân viên quản lý',
-    time:'21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '10',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '11',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '12',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '13',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '14',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '15',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-  {
-    key: '16',
-    name: 'Jim ',
-    role:'Nhân viên quản lý',
-    time: '21:00 11/19/2020',
-    address: 'London No. 2 Lake Park',
-  },
-];
 
 class User extends React.Component {
   state = {
@@ -164,15 +48,8 @@ class User extends React.Component {
         title: 'Tên',
         dataIndex: 'name',
         key: 'name',
-        filters: [
-          { text: 'Joe', value: 'Joe' },
-          { text: 'Jim', value: 'Jim' },
-        ],
-        filteredValue: filteredInfo.name || null,
-        onFilter: (value, record) => record.name.includes(value),
         sorter: (a, b) => a.name.length - b.name.length,
         sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-        ellipsis: true,
       },
       {
         title: 'Vai trò',
@@ -183,21 +60,19 @@ class User extends React.Component {
           { text: 'Nhân viên quản lý ', value: 'Nhân viên quản lý' },
           { text: 'Kỹ thuật viên', value: 'Kỹ thuật viên' },
           { text: 'Nhân viên chăm sóc cây trồng', value: 'Nhân viên chăm sóc cây trồng' },
-         
+
         ],
         filteredValue: filteredInfo.role || null,
         onFilter: (value, record) => record.role.includes(value),
         sorter: (a, b) => a.role.length - b.role.length,
         sortOrder: sortedInfo.columnKey === 'role' && sortedInfo.order,
-        ellipsis: true,
       },
       {
         title: 'Thời gian truy cập',
         dataIndex: 'time',
         key: 'time',
-        sorter: (a, b) => a.time - b.time,
+        sorter: (a, b) => a.time > b.time,
         sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
-        ellipsis: true,
       },
       {
         title: 'Địa điểm quản lý',
@@ -211,23 +86,40 @@ class User extends React.Component {
         onFilter: (value, record) => record.address.includes(value),
         sorter: (a, b) => a.address.length - b.address.length,
         sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
-        ellipsis: true,
+      },
+      {
+        title: 'Hành động',
+        dataIndex: 'type',
+        key: 'type',
+        filters: [
+          { text: 'London', value: 'London' },
+          { text: 'New York', value: 'New York' },
+        ],
+        filteredValue: filteredInfo.address || null,
+        onFilter: (value, record) => record.address.includes(value),
+        sorter: (a, b) => a.address.length - b.address.length,
+        sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
       },
     ];
     return (
       <>
-        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
       </>
     );
   }
 }
 
 class UserActivity extends React.Component {
-  state = {
-    searchText: '',
-    searchedColumn: '',
-  };
-
+  constructor(props){
+    super(props);
+    this.state = {
+      searchText: '',
+      searchedColumn: '',
+      filteredInfo: null,
+      sortedInfo: null,
+    };
+  }
+  
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
@@ -276,8 +168,8 @@ class UserActivity extends React.Component {
           textToHighlight={text ? text.toString() : ''}
         />
       ) : (
-        text
-      ),
+          text
+        ),
   });
 
   handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -291,11 +183,6 @@ class UserActivity extends React.Component {
   handleReset = clearFilters => {
     clearFilters();
     this.setState({ searchText: '' });
-  };
-
-  state = {
-    filteredInfo: null,
-    sortedInfo: null,
   };
 
   handleChange = (pagination, filters, sorter) => {
@@ -335,15 +222,15 @@ class UserActivity extends React.Component {
         title: 'Tên',
         dataIndex: 'name',
         key: 'name',
-        filters: [
-          { text: 'Joe', value: 'Joe' },
-          { text: 'Jim', value: 'Jim' },
-        ],
-        filteredValue: filteredInfo.name || null,
-        onFilter: (value, record) => record.name.includes(value),
         sorter: (a, b) => a.name.length - b.name.length,
         sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-        ellipsis: true,
+      },
+      {
+        title: 'Mã id',
+        dataIndex: 'id',
+        key: 'id',
+        sorter: (a, b) => a.name.length - b.name.length,
+        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
       },
       {
         title: 'Vai trò',
@@ -354,133 +241,218 @@ class UserActivity extends React.Component {
           { text: 'Nhân viên quản lý ', value: 'Nhân viên quản lý' },
           { text: 'Kỹ thuật viên', value: 'Kỹ thuật viên' },
           { text: 'Nhân viên chăm sóc cây trồng', value: 'Nhân viên chăm sóc cây trồng' },
-         
+
         ],
         filteredValue: filteredInfo.role || null,
         onFilter: (value, record) => record.role.includes(value),
         sorter: (a, b) => a.role.length - b.role.length,
         sortOrder: sortedInfo.columnKey === 'role' && sortedInfo.order,
-        ellipsis: true,
       },
       {
         title: 'Thời gian truy cập',
-        dataIndex: 'time',
-        key: 'time',
+        dataIndex: 'timestamp',
+        key: 'timestamp',
         sorter: (a, b) => a.time - b.time,
         sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
-        ellipsis: true,
       },
       {
-        title: 'Địa điểm quản lý',
-        dataIndex: 'address',
-        key: 'address',
-        filters: [
-          { text: 'London', value: 'London' },
-          { text: 'New York', value: 'New York' },
-        ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
+        title: 'Loại',
+        dataIndex: 'type',
+        key: 'type',
+        sorter: (a, b) => a.time - b.time,
+        sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
+      },
+      {
+        title: 'Mô tả',
+        dataIndex: 'description',
+        key: 'description',
         sorter: (a, b) => a.address.length - b.address.length,
         sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
-        ellipsis: true,
       },
       {
         title: 'Công việc đang làm',
-        dataIndex: 'working',
-        key: 'working',
+        dataIndex: 'workName',
+        key: 'workName',
         ...this.getColumnSearchProps('working'),
       },
     ];
     return (
       <>
-        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
       </>
     );
   }
 }
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={visible1:false};
-    this.showModal1=this.showModal1.bind(this);
-    this.state={visible2:false};
-    this.showModal2=this.showModal2.bind(this);
+    this.state = {
+      tableShow: '',
+      fromDate: '',
+      toDate: '',
+      logData: null,
+      logActivityData: null,
+      isLoadedLogData: false,
+      isLoadedLogActivityData: false,
+    };
+    this.onTableShowChange = this.onTableShowChange.bind(this);
+    this.onRangePickerChange = this.onRangePickerChange.bind(this);
+    this.setLogData = this.setLogData.bind(this);
+    this.setLogActivityData = this.setLogActivityData.bind(this);
   }
- 
-  showModal1(){
-    this.setState(state=>(
-      {
-        visible1: !state.visible1
-      }
-    ));
-  }
-  
-  showModal2(){
-   this.setState(state=>(
-     {
-       visible2: !state.visible2
-     }
-   ));
-   };
 
+  onTableShowChange(tableShow){
+    this.setState({tableShow: tableShow});
+  }
+
+  setLogData(fromDate, toDate) {
+    let url = null;
+    if (fromDate && toDate) {
+      url = 'https://it4883logging.herokuapp.com/api/user?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
+    } else {
+      url = 'https://it4883logging.herokuapp.com/api/user?username=G3&password=123';
+    }
+     
+    let config = {
+      method: 'get',
+      url: url,
+      headers: {}
+    };
+
+    axios(config)
+      .then((response) => {
+        let userData = response.data.map((user, index) => ({
+          key: index,
+          name: user.name,
+          role: user.role,
+          time: user.timestamp,
+          address: 'London No. 2 Lake Park',
+          type: user.type,
+        }));
+        userData.forEach((userData) => {
+          for(let key in userData) {
+            console.log(userData[key])
+            if (userData[key] == null) userData[key] ='';
+          }
+        });
+        this.setState({ logData: userData, isLoadedLogData: true });
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  setLogActivityData(fromDate, toDate) {
+    let url = null;
+    if (fromDate && toDate) {
+      url = 'https://it4883logging.herokuapp.com/api/activity/user?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G3&password=123';
+    } else {
+      url = 'https://it4883logging.herokuapp.com/api/activity/user?username=G3&password=123';
+    }
+     
+    let config = {
+      method: 'get',
+      url: url,
+      headers: {}
+    };
+    axios(config)
+      .then((response) => {
+        let userActivityData = response.data.map((user, index) => ({
+          key: index,
+          id: user.entityId,
+          name: user.name,
+          role: user.role,
+          type: user.type,
+          description: user.description,
+          timestamp: user.timestamp,
+          workName: user.workName,
+          
+        }));
+        userActivityData.forEach((userData) => {
+          for(let key in userData) {
+            if (userData[key] == null) userData[key] ='';
+          }
+        });
+        this.setState({ logActivityData: userActivityData, isLoadedLogActivityData: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  onRangePickerChange(dates, dateStrings) {
+    this.setState({isLoadedLogData: false, isLoadedLogActivityData:false});
+    let fromDate = "";
+    let toDate = "";
+
+    if (dates) {
+      fromDate = dates[0].format('YYYY-MM-DDThh:mm:ss');
+      toDate = dates[1].format('YYYY-MM-DDThh:mm:ss');
+    }
+
+    this.setLogData(fromDate, toDate);
+    this.setLogActivityData(fromDate, toDate);
+    
+  }
+
+  componentDidMount(){
+    this.setLogData(null, null);
+    this.setLogActivityData(null, null);
+  }
   render() {
     return (
       <>
-        <Col  style={{marginRight:'4%',marginTop:20}}>
-            <Card
+        <Col style={{ marginRight: '4%', marginTop: 20 }}>
+          <Card
             hoverable
-          style={{ width: '100',marginLeft:40}}
-          cover={
-            <img
-            style={{height:400}}
-              alt="example"
-              src="https://i.pinimg.com/originals/11/9d/e3/119de34b79d90fc7ee2c175525726741.jpg"
-            />
-          }
-        >
-           <h1>
-          Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
-        </h1>
-        <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-    <RangePicker />
-    
-  </Space >
-  </Form>
-<br/>
-        <Button type="primary" onClick={this.showModal1} htmlType="submit">
-          Log
-        </Button>
-        <div
-        style={{display:this.state.visible1?"block":"none"}}
-         
-        >
-          <User />
-        </div>
-        <Button type="primary" onClick={this.showModal2} htmlType="submit" style={{marginLeft:20}}>
-          Log Activity
-        </Button>
-        <div
-         
-         style={{display:this.state.visible2?"block":"none"}}
-         
-        >
-          <UserActivity />
-        </div>
-    
-        </Card>
+            style={{ width: '100', marginLeft: 40 }}
+            cover={
+              <img
+                style={{ height: 400 }}
+                alt="example"
+                src="https://i.pinimg.com/originals/11/9d/e3/119de34b79d90fc7ee2c175525726741.jpg"
+              />
+            }
+          >
+            <h1>
+              Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
+            </h1>
+            <br />
+            <Form rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+              <Space direction="vertical" size={12}>
+                <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
+              </Space >
+            </Form>
+            <br />
+
+            <Radio.Group buttonStyle="solid" onChange={(e) => {this.onTableShowChange(e.target.value)}} style={{marginBottom:'20px'}}>
+              <Radio.Button value="log">Log</Radio.Button>
+              <Radio.Button value="logActivity">LogActivity</Radio.Button>
+            </Radio.Group>
+            <br />
+            
+            <div style={{ display: this.state.tableShow == 'log' ? "block" : "none" }}>
+              <User data={this.state.logData} loading={!this.state.isLoadedLogData}/>
+            </div>
+            <div style={{ display: this.state.tableShow == 'logActivity' ? "block" : "none" }}>
+              <UserActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
+            </div>
+            
+            
+
+          </Card>
         </Col>
- </>
+      </>
     );
   }
 }
-function LogUser(){
-  return(
+function LogUser() {
+  return (
     <>
-<App />
-<BackTop/>
-</>
+      <App />
+      <BackTop />
+    </>
   );
-  }
-  export default LogUser;
+}
+export default LogUser;
