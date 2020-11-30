@@ -1,152 +1,45 @@
-import { Table, Input, Button, Space,BackTop,DatePicker,Form,Col,Card} from 'antd';
+import { Table, Input, Button, Space,BackTop,DatePicker,Form,Col,Card,Radio} from 'antd';
 import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined } from '@ant-design/icons'
 import React from 'react';
-const data = [
-  {
-    key: '1',
-    id:'1',
-    name: 'UAV1',
-  type:'Thêm UAV',
-  description:'Thêm kết nối UAV',
-  time:'21:00 11/19/2020',
-status:'Đang kết nối'
-  },
-  {
-    key: '2',
-    id:'2',
-    name: 'UAV2',
-  type:'Thêm UAV',
-  description:'Thêm kết nối UAV',
-  time:'21:00 11/19/2020',
-status:'Đã kết nối'
-  },
-  {
-    key: '3',
-    id:'3',
-    name: 'UAV3',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Chưa kết nối'
-  },
-  {
-    key: '4',
-    id:'4',
-    name: 'UAV1',
-    type:'Xóa UAV',
-    description:'Xóa kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Không tồn tại'
-  },
-  {
-    key: '5',
-    id:'5',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
-  
-  },
-  {
-    key: '6',
-    id:'6',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
- 
-  },
-  {
-    key: '7',
-    id:'7',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
- 
-  },
-  {
-    key: '8',
-    id:'8',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
-
-  },
-  {
-    key: '9',
-    id:'9',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
- 
-  },
-  {
-    key: '10',
-    id:'10',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
- 
-  },
-  {
-    key: '11',
-    id:'11',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
-  
-  },
-  {
-    key: '12',
-    id:'12',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
-  
-  },
-  {
-    key: '13',
-    id:'13',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
-  },
-  {
-    key: '14',
-    id:'14',
-    name: 'UAV1',
-    type:'Thêm UAV',
-    description:'Thêm kết nối UAV',
-    time:'21:00 11/19/2020',
-  status:'Đang kết nối'
-  },
-];
+var axios = require('axios');
 const { RangePicker } = DatePicker;
 
-class TablePayloadActivity extends React.Component {
+class ConnectUAVActivity extends React.Component {
   
   state = {
     searchText: '',
     searchedColumn: '',
+    filteredInfo: null,
+    sortedInfo: null,
+  };
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
   };
 
+  clearFilters = () => {
+    this.setState({ filteredInfo: null });
+  };
+
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null,
+    });
+  };
+
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'time',
+      },
+    });
+  };
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
@@ -213,12 +106,16 @@ class TablePayloadActivity extends React.Component {
   };
 
   render() {
+    let { sortedInfo} = this.state;
+    sortedInfo = sortedInfo || {};
+   
     const columns = [
       {
         title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
-        ...this.getColumnSearchProps('id'),
+        dataIndex: 'entityId',
+        key: 'entityId',
+        sorter: (a, b) => a.entityId - b.entityId,
+        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
       },
       {
         title: 'Tên',
@@ -227,7 +124,7 @@ class TablePayloadActivity extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Type',
+        title: 'Hành động',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
@@ -240,27 +137,60 @@ class TablePayloadActivity extends React.Component {
       },
       {
         title: 'Thời gian',
-        key: 'time',
-        dataIndex: 'time',
-        ...this.getColumnSearchProps('time'),
+        key: 'timestamp',
+        dataIndex: 'timestamp',
+        sorter: (a, b) => a.timestamp - b.name.timstamp,
+        sortOrder: sortedInfo.columnKey === 'timstamp' && sortedInfo.order,
       },
       {
         title: 'Trạng thái',
-        key: 'status',
-        dataIndex: 'status',
-        ...this.getColumnSearchProps('status'),
+        key: 'state',
+        dataIndex: 'state',
+        ...this.getColumnSearchProps('state'),
       }
     ];
-    return <Table columns={columns} dataSource={data} />;
+    return (
+      <>
+      <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange} />
+      </>
+          );
   }
 }
-class TablePayload extends React.Component {
+class ConnectUAV extends React.Component {
   
   state = {
     searchText: '',
     searchedColumn: '',
+    filteredInfo: null,
+    sortedInfo: null,
+  };
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
   };
 
+  clearFilters = () => {
+    this.setState({ filteredInfo: null });
+  };
+
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null,
+    });
+  };
+
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'time',
+      },
+    });
+  };
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
@@ -327,12 +257,16 @@ class TablePayload extends React.Component {
   };
 
   render() {
+    let { sortedInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+ 
     const columns = [
       {
         title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
-        ...this.getColumnSearchProps('id'),
+        dataIndex: 'entityId',
+        key: 'entityId',
+        sorter: (a, b) => a.entityId - b.entityId,
+        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
       },
       {
         title: 'Tên',
@@ -341,7 +275,7 @@ class TablePayload extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Type',
+        title: 'Hành động',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),
@@ -354,39 +288,136 @@ class TablePayload extends React.Component {
       },
       {
         title: 'Thời gian',
-        key: 'time',
-        dataIndex: 'time',
-        ...this.getColumnSearchProps('time'),
+        key: 'timestamp',
+        dataIndex: 'timestamp',
+        sorter: (a, b) => a.timestamp- b.timestamp,
+        sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
       },
      
     ];
-    return <Table columns={columns} dataSource={data} />;
+    return (
+      <>
+        <Table columns={columns} dataSource={this.props.data} loading={this.props.loading} onChange={this.handleChange}/>
+      </>
+    );
   }
 }
 class App extends React.Component{
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={visible1:false};
-    this.showModal1=this.showModal1.bind(this);
-    this.state={visible2:false};
-    this.showModal2=this.showModal2.bind(this)
+    this.state = {
+      tableShow: '',
+      fromDate: '',
+      toDate: '',
+      logData: null,
+      logActivityData: null,
+      isLoadedLogData: false,
+      isLoadedLogActivityData: false,
+    };
+    this.onTableShowChange = this.onTableShowChange.bind(this);
+    this.onRangePickerChange = this.onRangePickerChange.bind(this);
+    this.setLogData = this.setLogData.bind(this);
+    this.setLogActivityData = this.setLogActivityData.bind(this);
   }
 
- showModal1(){
-   this.setState(state=>(
-     {
-       visible1: !state.visible1
-     }
-   ));
- }
- 
- showModal2(){
-  this.setState(state=>(
-    {
-      visible2: !state.visible2
+  onTableShowChange(tableShow){
+    this.setState({tableShow: tableShow});
+  }
+
+  setLogData(fromDate, toDate) {
+    let url = null;
+    if (fromDate && toDate) {
+      url = 'https://it4883logging.herokuapp.com/api/uav-connect?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G12&password=123';
+    } else {
+      url = 'https://it4883logging.herokuapp.com/api/uav-connect?username=G12&password=123';
     }
-  ));
-  };
+     
+    let config = {
+      method: 'get',
+      url: url,
+      headers: {}
+    };
+
+    axios(config)
+      .then((response) => {
+        let connectData = response.data.map((connect, index) => ({
+          key: index,
+          entityId: connect.entityId,
+          name:connect.name,
+          description: connect.description,
+          timestamp:connect.timestamp,
+          type:connect.type,
+          state:connect.state,
+        }));
+        connectData.forEach((connectData) => {
+          for(let key in connectData) {
+            console.log(connectData[key])
+            if (connectData[key] == null) connectData[key] ='';
+          }
+        });
+        this.setState({ logData: connectData, isLoadedLogData: true });
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  setLogActivityData(fromDate, toDate) {
+    let url = null;
+    if (fromDate && toDate) {
+      url = 'https://it4883logging.herokuapp.com/api/activity/uav-connect?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G12&password=123';
+    } else {
+      url = 'https://it4883logging.herokuapp.com/api/activity/uav-connect?username=G12&password=123';
+    }
+     
+    let config = {
+      method: 'get',
+      url: url,
+      headers: {}
+    };
+    axios(config)
+      .then((response) => {
+        let connectActivityData = response.data.map((connect, index) => ({
+          key: index,
+          entityId: connect.entityId,
+          name: connect.name,
+          type: connect.type,
+          description: connect.description,
+          timestamp: connect.timestamp,
+          state:connect.state,
+        }));
+        connectActivityData.forEach((connectData) => {
+          for(let key in connectData) {
+            if (connectData[key] == null) connectData[key] ='';
+          }
+        });
+        this.setState({ logActivityData: connectActivityData, isLoadedLogActivityData: true });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  onRangePickerChange(dates, dateStrings) {
+    this.setState({isLoadedLogData: false, isLoadedLogActivityData:false});
+    let fromDate = "";
+    let toDate = "";
+
+    if (dates) {
+      fromDate = dates[0].format('YYYY-MM-DDThh:mm:ss');
+      toDate = dates[1].format('YYYY-MM-DDThh:mm:ss');
+    }
+
+    this.setLogData(fromDate, toDate);
+    this.setLogActivityData(fromDate, toDate);
+    
+  }
+
+  componentDidMount(){
+    this.setLogData(null, null);
+    this.setLogActivityData(null, null);
+  }
   render() {
     return (
       <>
@@ -406,31 +437,26 @@ class App extends React.Component{
           Chọn thời gian bạn muốn kiểm tra lịch sử kết nối UAV
         </h1>
         <br/>
-        <Form  rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
-       <Space direction="vertical" size={12}>
-    <RangePicker />
-    
-  </Space >
-  </Form>
-  
- 
-  <br/>
-        <Button type="primary" onClick={this.showModal1} htmlType="submit">
-          Log
-        </Button>
-        <div
-         style={{display:this.state.visible1?"block":"none"}}
-        >
-          <TablePayload />
-        </div>
-        <Button type="primary" onClick={this.showModal2} htmlType="submit" style={{marginLeft:20}}>
-          Log Activity
-        </Button>
-        <div
-          style={{display:this.state.visible2?"block":"none"}}
-        >
-          <TablePayloadActivity />
-        </div>
+        <Form rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
+              <Space direction="vertical" size={12}>
+                <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
+              </Space >
+            </Form>
+            <br />
+
+            <Radio.Group buttonStyle="solid" onChange={(e) => {this.onTableShowChange(e.target.value)}} style={{marginBottom:'20px'}}>
+              <Radio.Button value="log">Log</Radio.Button>
+              <Radio.Button value="logActivity">LogActivity</Radio.Button>
+            </Radio.Group>
+            <br />
+            
+            <div style={{ display: this.state.tableShow === 'log' ? "block" : "none" }}>
+              <ConnectUAV data={this.state.logData} loading={!this.state.isLoadedLogData}/>
+            </div>
+            <div style={{ display: this.state.tableShow === 'logActivity' ? "block" : "none" }}>
+              <ConnectUAVActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
+            </div>
+            
       </Card>
       </Col>
       
