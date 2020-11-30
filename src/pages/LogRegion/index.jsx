@@ -124,7 +124,7 @@ class MonitorRegionActivity extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
-        title: 'Hoạt động',
+        title: 'Hành động',
         dataIndex: 'type',
         key: 'type',
         ...this.getColumnSearchProps('type'),

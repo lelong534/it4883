@@ -155,6 +155,12 @@ class StatisticActivity extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
+        title: 'Hành động',
+        key: 'type',
+        dataIndex: 'type',
+        ...this.getColumnSearchProps('type'),
+      },
+      {
         title: 'Miêu tả',
         key: 'description',
         dataIndex: 'description',
@@ -166,12 +172,6 @@ class StatisticActivity extends React.Component {
         dataIndex: 'timestamp',
         sorter: (a, b) => a.timestamp - b.timestamp,
         sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
-      },
-      {
-        title: 'Hành động',
-        key: 'type',
-        dataIndex: 'type',
-        ...this.getColumnSearchProps('type'),
       },
       {
         title: 'Trạng thái',
@@ -306,6 +306,12 @@ class Statistic extends React.Component {
         ...this.getColumnSearchProps('name'),
       },
       {
+        title: 'Hành động',
+        key: 'type',
+        dataIndex: 'type',
+        ...this.getColumnSearchProps('type'),
+      },
+      {
         title: 'Miêu tả',
         key: 'description',
         dataIndex: 'description',
@@ -318,12 +324,7 @@ class Statistic extends React.Component {
         sorter: (a, b) => a.timestamp - b.timestamp,
         sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
       },
-      {
-        title: 'Hành động',
-        key: 'type',
-        dataIndex: 'type',
-        ...this.getColumnSearchProps('type'),
-      },
+   
      
     ];
     return (
