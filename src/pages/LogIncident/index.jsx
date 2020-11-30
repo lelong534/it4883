@@ -121,7 +121,7 @@ class ResolveProblemActivity extends React.Component {
         ...this.getColumnSearchProps('type'),
       },
       {
-        title: 'Miêu tả',
+        title: 'Mô tả',
         key: 'description',
         dataIndex: 'description',
         ...this.getColumnSearchProps('description'),
@@ -264,7 +264,7 @@ class ResolveProblem extends React.Component {
         ...this.getColumnSearchProps('type'),
       },
       {
-        title: 'Miêu tả',
+        title: 'Mô tả',
         key: 'description',
         dataIndex: 'description',
         ...this.getColumnSearchProps('description'),

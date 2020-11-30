@@ -7,6 +7,8 @@ const { RangePicker } = DatePicker;
 
 class User extends React.Component {
   state = {
+    searchText: '',
+    searchedColumn: '',
     filteredInfo: null,
     sortedInfo: null,
   };
@@ -38,25 +40,88 @@ class User extends React.Component {
       },
     });
   };
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select(), 100);
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
 
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    this.setState({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
+    });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
   render() {
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
     const columns = [
+     
+      {
+        title: 'Id',
+        dataIndex: 'entityId',
+        key: 'entityId',
+        sorter: (a, b) => a.entityId - b.entityId,
+        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+      },
       {
         title: 'Tên',
         dataIndex: 'name',
         key: 'name',
-        sorter: (a, b) => a.name.length - b.name.length,
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-      },
-      {
-        title: 'Id',
-        dataIndex: 'id',
-        key: 'id',
-        sorter: (a, b) => a.id > b.id ? 1 : -1,
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+        ...this.getColumnSearchProps('name'),
       },
       {
         title: 'Vai trò',
@@ -76,36 +141,22 @@ class User extends React.Component {
       },
       {
         title: 'Thời gian truy cập',
-        dataIndex: 'time',
-        key: 'time',
-        sorter: (a, b) => a.time > b.time,
-        sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
+        dataIndex: 'timestamp',
+        key: 'timestamp',
+        sorter: (a, b) => a.timestamp - b.name.timstamp,
+        sortOrder: sortedInfo.columnKey === 'timstamp' && sortedInfo.order,
       },
       {
         title: 'Địa điểm quản lý',
         dataIndex: 'address',
         key: 'address',
-        filters: [
-          { text: 'London', value: 'London' },
-          { text: 'New York', value: 'New York' },
-        ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+        ...this.getColumnSearchProps('address'),
       },
       {
         title: 'Hành động',
         dataIndex: 'type',
         key: 'type',
-        filters: [
-          { text: 'London', value: 'London' },
-          { text: 'New York', value: 'New York' },
-        ],
-        filteredValue: filteredInfo.address || null,
-        onFilter: (value, record) => record.address.includes(value),
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+        ...this.getColumnSearchProps('type'),
       },
     ];
     return (
@@ -126,7 +177,33 @@ class UserActivity extends React.Component {
       sortedInfo: null,
     };
   }
-  
+  handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    this.setState({
+      filteredInfo: filters,
+      sortedInfo: sorter,
+    });
+  };
+
+  clearFilters = () => {
+    this.setState({ filteredInfo: null });
+  };
+
+  clearAll = () => {
+    this.setState({
+      filteredInfo: null,
+      sortedInfo: null,
+    });
+  };
+
+  setAgeSort = () => {
+    this.setState({
+      sortedInfo: {
+        order: 'descend',
+        columnKey: 'time',
+      },
+    });
+  };
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div style={{ padding: 8 }}>
@@ -192,52 +269,24 @@ class UserActivity extends React.Component {
     this.setState({ searchText: '' });
   };
 
-  handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
-    this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter,
-    });
-  };
-
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
-  };
-
-  clearAll = () => {
-    this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
-    });
-  };
-
-  setAgeSort = () => {
-    this.setState({
-      sortedInfo: {
-        order: 'descend',
-        columnKey: 'time',
-      },
-    });
-  };
-
   render() {
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
     const columns = [
+      
+      {
+        title: 'ID',
+        dataIndex: 'entityId',
+        key: 'entityId',
+        sorter: (a, b) => a.entityId - b.entityId,
+        sortOrder: sortedInfo.columnKey === 'entityId' && sortedInfo.order,
+      },
       {
         title: 'Tên',
         dataIndex: 'name',
         key: 'name',
-        sorter: (a, b) => a.name.length - b.name.length,
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
-      },
-      {
-        title: 'Mã id',
-        dataIndex: 'id',
-        key: 'id',
-        sorter: (a, b) => a.name.length - b.name.length,
-        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order,
+        ...this.getColumnSearchProps('name'),
       },
       {
         title: 'Vai trò',
@@ -255,32 +304,31 @@ class UserActivity extends React.Component {
         sorter: (a, b) => a.role.length - b.role.length,
         sortOrder: sortedInfo.columnKey === 'role' && sortedInfo.order,
       },
+     
+      {
+        title: 'Hành động',
+        dataIndex: 'type',
+        key: 'type',
+        ...this.getColumnSearchProps('type'),
+      },
+      {
+        title: 'Miêu tả',
+        dataIndex: 'description',
+        key: 'description',
+        ...this.getColumnSearchProps('description'),
+      },
       {
         title: 'Thời gian truy cập',
         dataIndex: 'timestamp',
         key: 'timestamp',
-        sorter: (a, b) => a.time - b.time,
-        sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
-      },
-      {
-        title: 'Loại',
-        dataIndex: 'type',
-        key: 'type',
-        sorter: (a, b) => a.time - b.time,
-        sortOrder: sortedInfo.columnKey === 'time' && sortedInfo.order,
-      },
-      {
-        title: 'Mô tả',
-        dataIndex: 'description',
-        key: 'description',
-        sorter: (a, b) => a.address.length - b.address.length,
-        sortOrder: sortedInfo.columnKey === 'address' && sortedInfo.order,
+        sorter: (a, b) => a.timestamp- b.timestamp,
+        sortOrder: sortedInfo.columnKey === 'timestamp' && sortedInfo.order,
       },
       {
         title: 'Công việc đang làm',
         dataIndex: 'workName',
         key: 'workName',
-        ...this.getColumnSearchProps('working'),
+        ...this.getColumnSearchProps('workName'),
       },
     ];
     return (
@@ -332,10 +380,10 @@ class App extends React.Component {
           key: index,
           name: user.name,
           role: user.role,
-          time: user.timestamp,
+          timestamp: user.timestamp,
           address: 'London No. 2 Lake Park',
           type: user.type,
-          id: user.entityId,
+          entityId: user.entityId,
         }));
         userData.forEach((userData) => {
           for(let key in userData) {
@@ -368,7 +416,7 @@ class App extends React.Component {
       .then((response) => {
         let userActivityData = response.data.map((user, index) => ({
           key: index,
-          id: user.entityId,
+          entityId: user.entityId,
           name: user.name,
           role: user.role,
           type: user.type,
@@ -440,10 +488,10 @@ class App extends React.Component {
             </Radio.Group>
             <br />
             
-            <div style={{ display: this.state.tableShow == 'log' ? "block" : "none" }}>
+            <div style={{ display: this.state.tableShow === 'log' ? "block" : "none" }}>
               <User data={this.state.logData} loading={!this.state.isLoadedLogData}/>
             </div>
-            <div style={{ display: this.state.tableShow == 'logActivity' ? "block" : "none" }}>
+            <div style={{ display: this.state.tableShow === 'logActivity' ? "block" : "none" }}>
               <UserActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
             </div>
 
