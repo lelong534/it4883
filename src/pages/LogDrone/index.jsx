@@ -1,17 +1,24 @@
 import React from 'react';
-import { Table, Space, Button, BackTop, Input, Col, Card, DatePicker, Form, Radio } from 'antd';
+import { Table, Space, Button, BackTop, Input, Col, Row, Card, DatePicker, Form, Radio, Menu, MenuItem, Dropdown } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined } from '@ant-design/icons';
+import { DownOutlined, UserOutlined } from '@ant-design/icons';
 var axios = require('axios');
 const { RangePicker } = DatePicker;
 
 class User extends React.Component {
-  state = {
+  
+
+  constructor(props) {
+    super(props)
+    this.state = {
+    projectType: 'de_dieu',
     searchText: '',
     searchedColumn: '',
     filteredInfo: null,
     sortedInfo: null,
   };
+  }
 
   handleChange = (pagination, filters, sorter) => {
     console.log('Various parameters', pagination, filters, sorter);
@@ -141,6 +148,12 @@ class User extends React.Component {
         key: 'type',
         ...this.getColumnSearchProps('type'),
         
+      },
+      {
+        title: 'Region Id',
+        dataIndex: 'regionId',
+        key: 'regionId',
+        ...this.getColumnSearchProps('regionId'),
       },
       {
         title: 'Mô tả',
@@ -318,6 +331,12 @@ class UserActivity extends React.Component {
         ...this.getColumnSearchProps('description'),
       },
       {
+        title: 'Region Id',
+        dataIndex: 'regionId',
+        key: 'regionId',
+        ...this.getColumnSearchProps('regionId'),
+      },
+      {
         title: 'Thời gian',
         dataIndex: 'timestamp',
         key: 'timestamp',
@@ -344,18 +363,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      projectType: 'de_dieu',
       tableShow: '',
       fromDate: '',
       toDate: '',
       logData: null,
-      logActivityData: null,
       isLoadedLogData: false,
-      isLoadedLogActivityData: false,
     };
     this.onTableShowChange = this.onTableShowChange.bind(this);
     this.onRangePickerChange = this.onRangePickerChange.bind(this);
     this.setLogData = this.setLogData.bind(this);
-    this.setLogActivityData = this.setLogActivityData.bind(this);
   }
 
   onTableShowChange(tableShow){
@@ -367,7 +384,7 @@ class App extends React.Component {
     if (fromDate && toDate) {
       url = 'https://it4883logging.herokuapp.com/api/drones?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G1&password=123';
     } else {
-      url = 'https://it4883logging.herokuapp.com/api/drones?username=G1&password=123';
+      url = 'https://it4883logging.herokuapp.com/api/drones?projectType=' + this.state.projectType ;
     }
      
     let config = {
@@ -384,7 +401,6 @@ class App extends React.Component {
         }));
         userData.forEach((userData) => {
           for(let key in userData) {
-            console.log(userData[key])
             if (userData[key] == null) userData[key] ='';
           }
         });
@@ -396,40 +412,20 @@ class App extends React.Component {
       });
   }
 
-  setLogActivityData(fromDate, toDate) {
-    let url = null;
-    if (fromDate && toDate) {
-      url = 'https://it4883logging.herokuapp.com/api/activity/drone?minDate=' + fromDate +'&maxDate=' + toDate +'&username=G1&password=123';
-    } else {
-      url = 'https://it4883logging.herokuapp.com/api/activity/drone?username=G1&password=123';
-    }
-     
-    let config = {
-      method: 'get',
-      url: url,
-      headers: {}
-    };
-    axios(config)
-      .then((response) => {
-        let userActivityData = response.data.map((user, index) => ({
-          key: index,
-          ...user
-          
-        }));
-        userActivityData.forEach((userData) => {
-          for(let key in userData) {
-            if (userData[key] == null) userData[key] ='';
-          }
-        });
-        this.setState({ logActivityData: userActivityData, isLoadedLogActivityData: true });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+  handleDropdown=(e) =>{
+    let project_type = e.key;
+    this.setState({
+      projectType:project_type
+    })
+    this.setLogData();
+    console.log(e);
   }
 
+  
+
   onRangePickerChange(dates, dateStrings) {
-    this.setState({isLoadedLogData: false, isLoadedLogActivityData:false});
+    this.setState({isLoadedLogData: false });
     let fromDate = "";
     let toDate = "";
 
@@ -439,15 +435,34 @@ class App extends React.Component {
     }
 
     this.setLogData(fromDate, toDate);
-    this.setLogActivityData(fromDate, toDate);
     
   }
 
   componentDidMount(){
     this.setLogData(null, null);
-    this.setLogActivityData(null, null);
   }
+
+
+
   render() {
+
+    const menu = (
+      <Menu onClick={this.handleDropdown.bind(this)}>
+        <Menu.Item key="de_dieu" icon={<UserOutlined />}>
+          Đê điều
+        </Menu.Item>
+        <Menu.Item key="cay_trong" icon={<UserOutlined />}>
+          Cây trồng
+        </Menu.Item>
+        <Menu.Item key="luoi_dien" icon={<UserOutlined />}>
+          Lưới điện
+        </Menu.Item>
+        <Menu.Item key="chay_rung" icon={<UserOutlined />}>
+          Cháy rừng
+        </Menu.Item>
+      </Menu>
+    );
+
     return (
       <>
         <Col style={{ marginRight: '4%', marginTop: 20 }}>
@@ -466,26 +481,22 @@ class App extends React.Component {
               Chọn thời gian bạn muốn kiểm tra lịch sử hoạt động
             </h1>
             <br />
+            <Row>
             <Form rules={[{ required: true, message: 'Bạn chưa chọn thời gian!' }]}>
               <Space direction="vertical" size={12}>
                 <RangePicker format='DD/MM/YYYY' onChange={(dates, dateStrings) => this.onRangePickerChange(dates, dateStrings)} />
               </Space >
             </Form>
-            <br />
-
-            <Radio.Group buttonStyle="solid" onChange={(e) => {this.onTableShowChange(e.target.value)}} style={{marginBottom:'20px'}}>
-              <Radio.Button value="log">Log</Radio.Button>
-              <Radio.Button value="logActivity">LogActivity</Radio.Button>
-            </Radio.Group>
-            <br />
+            <Space></Space>
+            <Dropdown overlay={menu}>
+              <Button>
+                Chọn dịch vụ giám sát <DownOutlined />
+              </Button>
+            </Dropdown>
+            </Row>
+            <br/>
             
-            <div style={{ display: this.state.tableShow === 'log' ? "block" : "none" }}>
-              <User data={this.state.logData} loading={!this.state.isLoadedLogData}/>
-            </div>
-            <div style={{ display: this.state.tableShow === 'logActivity' ? "block" : "none" }}>
-              <UserActivity data={this.state.logActivityData} loading={!this.state.isLoadedLogActivityData}/>
-            </div>
-          </Card>
+              <User data={this.state.logData} loading={!this.state.isLoadedLogData}/>          </Card>
         </Col>
       </>
     );
